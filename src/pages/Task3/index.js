@@ -1,6 +1,4 @@
 
-
-
 import { useState } from "react";
 import Strip from "./Strip";
 import { Form } from "react-bootstrap"
@@ -9,7 +7,7 @@ const Task3 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let task = {
-      'id': tasks.length,
+      'id': tasks.length + 1,
       'task': e.target.task.value,
       'status': 'incompleted',
     };
@@ -34,8 +32,6 @@ const Task3 = () => {
           })
         }
       </div>
-
-       
 
   );
 };
