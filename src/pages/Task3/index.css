@@ -21,6 +21,7 @@
 }
 .todo-container .form-control{
     font-family: var(--font);
+width: 100%;
 }
 .todo-container .form-control:focus{
    outline: none !important;
@@ -83,4 +84,7 @@
 }
 .active-todo .form-check-label{
     font-size: 1.5rem !important;
+}
+.completed{
+    text-decoration: line-through;
 }
