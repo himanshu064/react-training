@@ -12,6 +12,10 @@ function TodoSearch( params ) {
     function deleteAll() {
         params.onclick()   
     }
+    //Complete Function
+    function completeAll() {
+        params.completeall();
+    }
     return (<div className={`${classes.back}`}>
                 <h1>Todo List</h1>
                 <div className={`${classes.heading}`} >
@@ -24,6 +28,9 @@ function TodoSearch( params ) {
                     </div>
                     <div className={`${classes.formpaddingdiv}`}>
                     <input type="button" value="Delete All" onClick={()=>deleteAll()} />
+                    </div>
+                    <div className={`${classes.formpaddingdiv}`}>
+                    <input type="button" value="Complete All" onClick={()=>completeAll()} />
                     </div>
                 </form>
                 </div> <br/> 
