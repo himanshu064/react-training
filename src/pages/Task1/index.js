@@ -12,16 +12,15 @@ const Task1 = () => {
   ]
 
   return (
-    <>
-    <Navbar/>
-      {
-        obj.map(function (val) {
-          return(
-            <p key={val.id} style={{ color: `${val.textColor}` }}>{val.text}</p>
-          )
-        })
-      }
-    </>
+      <div className="container">
+        {
+          obj.map(function (val) {
+            return (
+              <p key={val.id} style={{ color: `${val.textColor}` }}>{val.text}</p>
+            )
+          })
+        }
+      </div>
   )
 }
 export default Task1;

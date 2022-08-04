@@ -1,4 +1,6 @@
 
+import React from "react";
+
 export default function Strip(props) {
   return (
     <div className={props.className}>

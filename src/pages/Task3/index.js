@@ -1,8 +1,8 @@
 
+import React from "react";
 import { useState } from "react";
 import Strip from "./Strip";
 import { Form } from "react-bootstrap"
-import Navbar from "../Navbar";
 
 const Task3 = () => {
   const [tasks, addTasks] = useState([]);
@@ -24,8 +24,6 @@ const Task3 = () => {
     console.log(allTasks);
   }
   return (
-    <>
-      <Navbar />
       <div className="container">
         <Form onSubmit={handleSubmit} >
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -44,7 +42,6 @@ const Task3 = () => {
           })
         }
       </div>
-    </>
 
   );
 };

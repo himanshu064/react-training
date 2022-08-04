@@ -10,7 +10,7 @@ function NavbarX() {
         <>
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand >Navbar</Navbar.Brand>
+                    <Navbar.Brand >React Tasks</Navbar.Brand>
                     <Nav className="ms-auto">
                         <NavLink to="/" className="nav-link" style={({ isActive }) =>
                             isActive ? { color: 'white' } : undefined
