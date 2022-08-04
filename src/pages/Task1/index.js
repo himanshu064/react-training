@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Navbar";
+
 
 const Task1 = () => {
 
@@ -12,7 +12,7 @@ const Task1 = () => {
   ]
 
   return (
-      <div className="container">
+      <div className="container containerX">
         {
           obj.map(function (val) {
             return (

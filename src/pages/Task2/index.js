@@ -7,7 +7,7 @@ const Task2 = (props) => {
     table.push(<p key={i}>{getTable} x {i}  = {getTable * i}</p>) 
   }
   return (
-      <div className="container">
+      <div className="container containerX">
         {table}
       </div>
    );
