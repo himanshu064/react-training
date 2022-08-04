@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../Navbar";
 
 const Task2 = (props) => {
   var getTable = parseInt(props.table);
@@ -6,7 +7,12 @@ const Task2 = (props) => {
   for (let i = 1; i <= 10; i++) {
     table.push(<p>{getTable} x {i}  = {getTable * i}</p>) 
   }
-  return table;
+  return (
+    <>
+     <Navbar/>
+      {table}
+    </>
+   );
 };
 
 export default Task2;
