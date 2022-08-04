@@ -1,0 +1,24 @@
+.App{
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 600px;
+    margin: auto;
+    margin-top: 10px;
+}
+.header{
+    display: flex;
+    border: 2px solid green;
+    width: 500px;
+    border-radius: 15px;
+    margin-left: 30px;
+    justify-content: center;
+}
+.num{
+    border: 2px solid green;
+    width: 100px;
+    border-radius: 15px;
+    margin-left: 250px;
+}
+ul{
+    list-style: none;
+}
