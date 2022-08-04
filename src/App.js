@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Task1 from "./pages/Task1";
 import Task2 from "./pages/Task2";
