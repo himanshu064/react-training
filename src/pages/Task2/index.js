@@ -1,7 +1,7 @@
 import React from "react";
-
+import Number from "./Component/Number"
 const Task2 = () => {
-  return <div>Task2</div>;
+  return <><Number/></>;
 };
 
 export default Task2;

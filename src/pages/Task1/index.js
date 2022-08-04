@@ -1,7 +1,9 @@
 import React from "react";
-
+import TextComponent from "./Component/TextComponent";
 const Task1 = () => {
-  return <div>Task1</div>;
+  return <>
+<TextComponent/>
+  </>;
 };
 
 export default Task1;
