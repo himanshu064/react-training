@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/task1' element={<Task1 />} />
-        <Route path='/task2' element={<Task2 />} />
+        <Route path='/task2' element={<Task2  number="8" max="20" />} />
         <Route path='/task3' element={<Task3 />} />
       </Routes>
     </BrowserRouter>
