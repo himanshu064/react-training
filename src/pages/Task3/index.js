@@ -103,7 +103,7 @@ const TodoList = () => {
     <>
       <TodoSearch onClick={updateTask} onclick={deleteTask} completeall={completeAll} />
       <TodoTable tasks={allTasks} onclick={deleteoneTask} onComplete={completedTask} />
-      <TodoFilters onClickAll={showAllTasks} onClickActive={showAllActiveTasks} onClickComplete={showAllComletedTasks} />
+      <TodoFilters onClickAll={showAllTasks} onClickActive={showAllActiveTasks} onClickComplete={showAllComletedTasks} tasks={allTasks} />
     </>
   )
 }

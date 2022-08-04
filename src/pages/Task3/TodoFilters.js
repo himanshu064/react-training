@@ -2,6 +2,7 @@ import React,{usestate} from "react";
 import classes from "./index.module.css";
 
 function Filters(props){
+    console.log(props.tasks,"task in props ")
 
     function allTasks() {
         props.onClickAll()
