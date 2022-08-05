@@ -6,7 +6,6 @@ import TodoFilters from "./TodoFilters";
 const TodoList = () => {
   let storage = localStorage.getItem("alltasks")
   var tasks;
-  console.log(storage,"storage")
   if (storage === null) {
     tasks = []
   }
@@ -14,22 +13,16 @@ const TodoList = () => {
     tasks = JSON.parse(storage)
   }
   const [allTasks, setTasks] = useState(tasks)
-    console.log("allTasks outside are",allTasks)
-    
-
   //Adding a Task
   const updateTask = (text) => {
-    if (text != "") {
-      setTasks([...allTasks, {
+    if (text !== "") {
+      const newSetTask = [...allTasks, {
         title: text,
         completed: false,
-      }])
-      console.log(allTasks,"updated all taskes are")
-      tasks = allTasks;
-      localStorage.setItem("alltasks", JSON.stringify(tasks))
-       
+      }]
+      setTasks(newSetTask)
+      return localStorage.setItem("alltasks", JSON.stringify(newSetTask))
     }
-    
   }
   //Deleting All the Tasks
   const deleteTask = () => {
@@ -43,7 +36,7 @@ const TodoList = () => {
       if (element.title === key && idx === index) {
         element.completed = !element.completed
       }
-      tasks=newAllTasks
+      tasks = newAllTasks
       localStorage.setItem("alltasks", JSON.stringify(tasks))
       return setTasks(newAllTasks)
     })
@@ -53,52 +46,46 @@ const TodoList = () => {
     const newAllTasks = [...allTasks]
     newAllTasks.splice(index, 1)
     setTasks(newAllTasks)
-    localStorage.setItem("alltasks",JSON.stringify(newAllTasks))
+    return localStorage.setItem("alltasks", JSON.stringify(newAllTasks))
   }
   //Complete all Tasks
   const completeAll = () => {
     const newAllTasks = [...allTasks]
     newAllTasks.map((item, index) => {
-      console.log(item.completed, ":item", index)
       item.completed = true;
-      setTasks(newAllTasks)
+      return setTasks(newAllTasks)
     })
+    return localStorage.setItem("alltasks", JSON.stringify(newAllTasks))
   }
   //ShowAllTask
   const showAllTasks = () => {
-    const showall = JSON.parse(localStorage.getItem("alltasks")) 
-    console.log(showall)
-    setTasks(showall)
+    const showall = JSON.parse(localStorage.getItem("alltasks"))
+    return setTasks(showall)
   }
+  //All active Tasks
   const showAllActiveTasks = () => {
-    const showactive = JSON.parse(localStorage.getItem("alltasks")) 
-    console.log(showactive)
+    const showactive = JSON.parse(localStorage.getItem("alltasks"))
     var updated = []
     showactive.map((item) => {
       if (item.completed === false) {
-        console.log(item.title)
-        updated.push(item)
+        return updated.push(item)
       }
+      return updated
     })
-    console.log(updated)
-    setTasks(updated)
+    return setTasks(updated)
   }
+  //All completed Tasks
   const showAllComletedTasks = () => {
-    const complpetedTasks = JSON.parse(localStorage.getItem("alltasks")) 
+    const complpetedTasks = JSON.parse(localStorage.getItem("alltasks"))
     var updated = []
     complpetedTasks.map((item) => {
       if (item.completed === true) {
-        console.log(item.title)
-        
-        updated.push(item)
-        
+        return updated.push(item)
       }
+      return updated
     })
-    console.log(updated)
-   
-    setTasks(updated)
+    return setTasks(updated)
   }
-
   return (
     <>
       <TodoSearch onClick={updateTask} onclick={deleteTask} completeall={completeAll} />

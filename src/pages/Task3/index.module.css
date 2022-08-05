@@ -62,3 +62,6 @@ table{
     margin: auto;
     justify-content: space-evenly;  
 }
+.todospan{
+    font-size: small;
+}

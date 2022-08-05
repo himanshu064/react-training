@@ -14,10 +14,8 @@ function TodoTable({tasks,onclick,onComplete}) {
             <table>
                 <tbody >
                     {
-                        tasks&&
-                        tasks.map((item,index) => {
-                            return (
-                                
+                        tasks&&tasks.map((item,index) => {
+                            return ( 
                                 <tr key={index} >
                                     <td>
                                         {index+1}
