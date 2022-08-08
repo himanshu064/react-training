@@ -2,8 +2,7 @@ import React from "react";
 
 
 const Task1 = () => {
-  return <div>Task1</div>;
-};
+ 
 
   var obj = [
     { id: Math.random(), text: "Walk the dog", textColor: "red" },
@@ -24,6 +23,6 @@ const Task1 = () => {
         }
       </div>
   )
-
+      };
 export default Task1;
 
