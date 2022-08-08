@@ -1,13 +1,16 @@
 import React from "react";
 
 const Task2 = (props) => {
-  let t = parseInt(props.table)
- 
-  let table = []; 
+  var getTable = parseInt(props.table);
+  var table =[];
   for (let i = 1; i <= 10; i++) {
-    table.push( <p key={i}>{t} x {i} = {t * i}</p>);   
+    table.push(<p key={i}>{getTable} x {i}  = {getTable * i}</p>) 
   }
-  return table;
+  return (
+      <div className="container containerX">
+        {table}
+      </div>
+   );
 };
 
 export default Task2;

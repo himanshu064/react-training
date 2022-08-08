@@ -1,0 +1,22 @@
+.containerX {
+  margin: 18px auto;
+  border: 2px solid #ced4da;
+  padding: 25px 20px 15px 20px !important;
+  border-radius: 7px;
+}
+.rowX {
+  background: #ced4da;
+  padding: 0;
+  margin: 0 0 10px 0 !important;
+   border-radius: 7px;
+}
+.rowX h3 {
+  font-size: 20px;
+  padding: 10px 10px;
+  color: #766d6d;
+  text-transform: capitalize;
+}
+
+.line-through{
+  text-decoration: line-through;
+}
