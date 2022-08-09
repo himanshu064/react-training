@@ -377,7 +377,7 @@ const Data = [
     "IMDB Rating": 8.1,
     "IMDB Votes": 169858,
   },
-  /* {
+  {
     Title: 1776,
     "US Gross": 0,
     "Worldwide Gross": 0,
@@ -394,8 +394,8 @@ const Data = [
     "Rotten Tomatoes Rating": 57,
     "IMDB Rating": 7,
     "IMDB Votes": 4099,
-  }, */
-  /* {
+  },
+  {
     Title: 1941,
     "US Gross": 34175000,
     "Worldwide Gross": 94875000,
@@ -412,7 +412,7 @@ const Data = [
     "Rotten Tomatoes Rating": 33,
     "IMDB Rating": 5.6,
     "IMDB Votes": 13364,
-  }, */
+  },
   {
     Title: "Chacun sa nuit",
     "US Gross": 18435,
@@ -9360,7 +9360,7 @@ const Data = [
     "IMDB Votes": 24872,
   },
   {
-    Title: "Lion of the Desert",
+    Title: "Lion of the Desert 2",
     "US Gross": 1500000,
     "Worldwide Gross": 1500000,
     "US DVD Sales": null,
@@ -19223,7 +19223,7 @@ const Data = [
     "IMDB Rating": 5.1,
     "IMDB Votes": 23243,
   },
-  /* {
+  {
     Title: 1408,
     "US Gross": 71985628,
     "Worldwide Gross": 128529299,
@@ -19240,7 +19240,7 @@ const Data = [
     "Rotten Tomatoes Rating": 78,
     "IMDB Rating": 6.9,
     "IMDB Votes": 72913,
-  }, */
+  },
   {
     Title: "15 Minutes",
     "US Gross": 24375436,
@@ -19331,7 +19331,7 @@ const Data = [
     "IMDB Rating": 4.7,
     "IMDB Votes": 6839,
   },
-  /* {
+  {
     Title: 2012,
     "US Gross": 166112167,
     "Worldwide Gross": 766812167,
@@ -19348,8 +19348,8 @@ const Data = [
     "Rotten Tomatoes Rating": 39,
     "IMDB Rating": 6.2,
     "IMDB Votes": 396,
-  }, */
-  /*  {
+  },
+  {
     Title: 2046,
     "US Gross": 1442338,
     "Worldwide Gross": 19202856,
@@ -19366,7 +19366,7 @@ const Data = [
     "Rotten Tomatoes Rating": null,
     "IMDB Rating": 7.5,
     "IMDB Votes": 19431,
-  }, */
+  },
   {
     Title: "20 Dates",
     "US Gross": 541636,
@@ -19385,7 +19385,7 @@ const Data = [
     "IMDB Rating": 4.9,
     "IMDB Votes": 1423,
   },
-  /* {
+  {
     Title: 21,
     "US Gross": 81159365,
     "Worldwide Gross": 157852532,
@@ -19402,7 +19402,7 @@ const Data = [
     "Rotten Tomatoes Rating": 35,
     "IMDB Rating": 6.7,
     "IMDB Votes": 60918,
-  }, */
+  },
   {
     Title: "21 Grams",
     "US Gross": 16248701,
@@ -20015,7 +20015,7 @@ const Data = [
     "IMDB Rating": 7,
     "IMDB Votes": 13631,
   },
-  /* {
+  {
     Title: 9,
     "US Gross": 31749894,
     "Worldwide Gross": 46603791,
@@ -20032,7 +20032,7 @@ const Data = [
     "Rotten Tomatoes Rating": null,
     "IMDB Rating": 7.8,
     "IMDB Votes": 1488,
-  },*/
+  },
   {
     Title: "Nine Queens",
     "US Gross": 1222889,

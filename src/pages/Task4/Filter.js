@@ -32,11 +32,36 @@ const Filter = () => {
     event.preventDefault();
     let updateData = [...Data];
     Object.keys(formdata).map((item) => {
-      if (item === "rating") {
+      if (item === "title" && formdata[[item]] !== "") {
+        updateData = sortByTitle(updateData, formdata[[item]]);
+      }
+      if (item === "rating" && formdata[[item]] !== "") {
         updateData = sortByFilter(updateData, formdata[[item]]);
       }
-      if (item === "genre") {
+      if (item === "genre" && formdata[[item]] !== "") {
         updateData = sortByGenre(updateData, formdata[[item]]);
+      }
+      if (
+        item === "startDate" &&
+        formdata[[item]] !== "" &&
+        formdata.endDate !== ""
+      ) {
+        updateData = sortByDate(
+          updateData,
+          formdata.startDate,
+          formdata.endDate
+        );
+      }
+      if (
+        item === "endDate" &&
+        formdata[[item]] !== "" &&
+        formdata.startDate !== ""
+      ) {
+        updateData = sortByDate(
+          updateData,
+          formdata.startDate,
+          formdata.endDate
+        );
       }
     });
     setInitalData(updateData);
@@ -50,6 +75,23 @@ const Filter = () => {
   const sortByGenre = (Data, key) => {
     const filterByGenre = Data.filter((item) => item["Major Genre"] === key);
     return filterByGenre;
+  };
+  const sortByDate = (Data, startDate, endDate) => {
+    const sDate = new Date(startDate);
+    const eDate = new Date(endDate);
+    const filterByDate = Data.filter((item) => {
+      return (
+        new Date(item["Release Date"]) >= new Date(sDate) &&
+        new Date(item["Release Date"]) <= new Date(eDate)
+      );
+    });
+    return filterByDate;
+  };
+  const sortByTitle = (Data, key) => {
+    const title = Data.filter((item) => {
+      return String(item["Title"]).toLowerCase().includes(key.toLowerCase());
+    });
+    return title;
   };
 
   return (
