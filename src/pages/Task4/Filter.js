@@ -11,7 +11,6 @@ const Filter = () => {
     rating: "",
     genre: "",
   });
-  const [filter, setFilter] = useState("");
   const HandleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -31,63 +30,26 @@ const Filter = () => {
 
   const HandleFilter = (event) => {
     event.preventDefault();
-    if (
-      formdata.rating !== "" &&
-      formdata.genre !== "" &&
-      formdata.startDate !== "" &&
-      formdata.endDate !== ""
-    ) {
-      setFilter("ALL");
-    } else if (formdata.rating !== "") {
-      setFilter("Rating");
-    } else if (formdata.genre !== "") {
-      setFilter("genre");
-    } else if (formdata.startDate !== "" && formdata.endDate !== "") {
-      setFilter("Date");
-    }
-
-    const sDate = new Date(formdata.startDate);
-    const eDate = new Date(formdata.endDate);
-    switch (filter) {
-      case "ALL":
-        let commonfilter = Data.filter((item) => {
-          return (
-            new Date(item["Release Date"]) >= new Date(sDate) &&
-            new Date(item["Release Date"]) <= new Date(eDate)
-          );
-        })
-          .filter((item) => item["Major Genre"] === formdata.genre)
-          .filter((item) => Math.round(item["IMDB Rating"]) == formdata.rating)
-          .sort((a, b) => a["IMDB Rating"] - b["IMDB Rating"]);
-
-        setInitalData(commonfilter);
-        setFilter("");
-        break;
-      case "Rating":
-        const rating = Data.filter(
-          (item) => Math.round(item["IMDB Rating"]) == formdata.rating
-        ).sort((a, b) => a["IMDB Rating"] - b["IMDB Rating"]);
-        setInitalData(rating);
-        setFilter("");
-        break;
-      case "Date":
-        const filterByDate = Data.filter((item) => {
-          return (
-            new Date(item["Release Date"]) >= new Date(sDate) &&
-            new Date(item["Release Date"]) <= new Date(eDate)
-          );
-        });
-        setInitalData(filterByDate);
-        setFilter("");
-        break;
-      case "genre":
-        const filterByGenre = Data.filter(
-          (item) => item["Major Genre"] === formdata.genre
-        );
-        setInitalData(filterByGenre);
-        setFilter("");
-        break;
-    }
+    let updateData = [...Data];
+    Object.keys(formdata).map((item) => {
+      if (item === "rating") {
+        updateData = sortByFilter(updateData, formdata[[item]]);
+      }
+      if (item === "genre") {
+        updateData = sortByGenre(updateData, formdata[[item]]);
+      }
+    });
+    setInitalData(updateData);
+  };
+  const sortByFilter = (Data, key) => {
+    const rating = Data.filter(
+      (item) => Math.round(item["IMDB Rating"]) == key
+    ).sort((a, b) => a["IMDB Rating"] - b["IMDB Rating"]);
+    return rating;
+  };
+  const sortByGenre = (Data, key) => {
+    const filterByGenre = Data.filter((item) => item["Major Genre"] === key);
+    return filterByGenre;
   };
 
   return (
