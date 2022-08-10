@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Data from "./Component/Data";
 import "./index.css";
 import moment from "moment";
@@ -16,11 +16,12 @@ const Filter = () => {
     const value = event.target.value;
     setfromData({ ...formdata, [name]: value });
   };
-  let topRatedMovie = Data.filter((movies) => movies["IMDB Rating"] >= 7).sort(
-    (a, b) => a["IMDB Rating"] - b["IMDB Rating"]
+
+  let topRatedMovie = Data.filter((movies) => movies["IMDB Rating"] >= 8).sort(
+    (a, b) => b["IMDB Rating"] - a["IMDB Rating"]
   );
+
   const [intitalData, setInitalData] = useState(topRatedMovie);
-  intitalData.length = 200;
   // unique genre
   const dupGenre = Data.map((item) => {
     return item["Major Genre"];
@@ -68,7 +69,7 @@ const Filter = () => {
   };
   const sortByFilter = (Data, key) => {
     const rating = Data.filter(
-      (item) => Math.round(item["IMDB Rating"]) == key
+      (item) => Math.round(item["IMDB Rating"]) === key
     ).sort((a, b) => a["IMDB Rating"] - b["IMDB Rating"]);
     return rating;
   };
