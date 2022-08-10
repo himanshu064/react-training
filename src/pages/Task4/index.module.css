@@ -1,0 +1,84 @@
+.heading{
+    text-align: -webkit-center;
+}
+.back{
+    padding: 20px;
+    background: linear-gradient(to right, #ffffff -9%, #66ffcc 100%);
+    margin: auto;
+    width: 723px;
+    border-radius: 10px;
+}
+h1{
+    text-align: -webkit-center;
+}
+tr{
+    padding: 5px;
+}
+td,th{
+    padding: 10px;
+}
+.design{
+    padding: 20px;
+    background-color: rgb(170, 220, 253);   
+}
+tbody{
+    background: linear-gradient(to right, #ffffff -9%, #66ffcc 100%);
+}
+tbody, td, tr,th{
+    border-radius: 10px;
+    border-color: rgb(245 255 253);
+    border-style: solid;
+    border-width: 1px;
+    width: 169px;
+    text-align: center
+}
+[type=button]{
+    background-color: rgb(224, 253, 255);
+    border: none;
+    border-radius: 5px;
+    font-size: larger;
+}
+[type=button]:hover{
+    background-color: rgb(179, 255, 250);
+}
+[type=text]{
+    font-size: initial;
+}
+form{
+    display: flex;
+    margin: auto;  
+    justify-content: center;
+}
+.formpaddingdiv{
+    padding-right: 13px;
+}
+.textfields{
+    width: 300px;
+}
+table{
+    border-spacing: 0px;
+}
+.displayInline{
+    display: flex;
+    margin: auto;
+    justify-content: space-evenly;  
+}
+.todospan{
+    font-size: small;
+}
+.formdata{
+    display: flex;
+    padding: 8px;
+    font-size: 26px;
+}
+button{
+    background-color: rgb(224, 253, 255);
+    border: none;
+    border-radius: 5px;
+    font-size: larger;
+    width: 150px;
+    height: 40px;
+}
+.TextCapital{
+    text-transform:capitalize;
+}
