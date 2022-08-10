@@ -28,10 +28,10 @@ const Filter = () => {
   });
   const uniquDup = [...new Set(dupGenre)];
   uniquDup.shift();
-
+  let updateData;
   const HandleFilter = (event) => {
     event.preventDefault();
-    let updateData = [...Data];
+    updateData = [...Data];
     Object.keys(formdata).map((item) => {
       if (item === "title" && formdata[[item]] !== "") {
         updateData = sortByTitle(updateData, formdata[[item]]);
@@ -69,7 +69,7 @@ const Filter = () => {
   };
   const sortByFilter = (Data, key) => {
     const rating = Data.filter(
-      (item) => Math.round(item["IMDB Rating"]) === key
+      (item) => Math.round(item["IMDB Rating"]) == key
     ).sort((a, b) => a["IMDB Rating"] - b["IMDB Rating"]);
     return rating;
   };
@@ -94,7 +94,16 @@ const Filter = () => {
     });
     return title;
   };
-
+  const LowToHigh = () => {
+    let newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) => (a.Title > b.Title ? 1 : -1));
+    setInitalData(sortedData);
+  };
+  const HighToLow = () => {
+    let newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) => (b.Title > a.Title ? 1 : -1));
+    setInitalData(sortedData);
+  };
   return (
     <>
       <h1 className="text-center task-heading pt-3">Filter Movie Task</h1>
@@ -190,7 +199,21 @@ const Filter = () => {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Tile</th>
+              <th scope="col">
+                Tile
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-down ms-2"
+                    onClick={LowToHigh}
+                  ></i>
+                </span>
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-up ms-2"
+                    onClick={HighToLow}
+                  ></i>
+                </span>
+              </th>
               <th scope="col">Release date</th>
               <th scope="col">Running time</th>
               <th scope="col">Genre</th>
