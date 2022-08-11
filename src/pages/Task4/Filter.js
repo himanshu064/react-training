@@ -27,12 +27,10 @@ const Filter = () => {
   });
   const uniquDup = [...new Set(dupGenre)];
   uniquDup.shift();
-  let updateData;
   const HandleFilter = (event) => {
     event.preventDefault();
-    updateData = [...Data];
+    let updateData = [...Data];
     Object.keys(formdata).map((item) => {
-      console.log(item);
       if (item === "title" && formdata[[item]] !== "") {
         updateData = sortByTitle(updateData, formdata[[item]]);
       }
@@ -64,6 +62,12 @@ const Filter = () => {
           formdata.endDate
         );
       }
+      if (item === "startDate" && formdata[[item]] !== "") {
+        updateData = sortBystartDate(updateData, formdata.startDate);
+      }
+      if (item === "endDate" && formdata[[item]] !== "") {
+        updateData = sortByendDate(updateData, formdata.endDate);
+      }
     });
     setInitalData(updateData);
   };
@@ -93,6 +97,20 @@ const Filter = () => {
       return String(item["Title"]).toLowerCase().includes(key.toLowerCase());
     });
     return title;
+  };
+  const sortBystartDate = (Data, key) => {
+    const sDate = new Date(key);
+    const startDate = Data.filter((item) => {
+      return new Date(item["Release Date"]) >= new Date(sDate);
+    });
+    return startDate;
+  };
+  const sortByendDate = (Data, key) => {
+    const eDate = new Date(key);
+    const endDate = Data.filter((item) => {
+      return new Date(item["Release Date"]) <= new Date(eDate);
+    });
+    return endDate;
   };
   // filter title by ascending order
   const LowToHigh = () => {
