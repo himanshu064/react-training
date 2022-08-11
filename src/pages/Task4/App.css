@@ -7,9 +7,22 @@
     color: white;
     margin-top: 16px;
   }
+  .btn:hover{
+    background-color: rgb(227, 227, 241);
+  }
   .heading{
-    border: 2px solid black;
     text-align: center;
     background-color: black;
     color: white;
+  }
+  .button{
+    color: green;
+    margin: 2px;
+  }
+  form{
+    border: 2px solid green;
+    background-color: green;
+  }
+  .na{
+    color: red;
   }

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Task1 from "./pages/Task1";
 import Task2 from "./pages/Task2";
 import Task3 from "./pages/Task3";
-import Task4 from "./pages/Task4";
+import Task4 from "./pages/Task4/Index";
 
 function App() {
   return (
