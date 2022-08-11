@@ -17,10 +17,9 @@ const Filter = () => {
     setfromData({ ...formdata, [name]: value });
   };
 
-  let topRatedMovie = Data.filter((movies) => movies["IMDB Rating"] >= 8).sort(
-    (a, b) => b["IMDB Rating"] - a["IMDB Rating"]
-  );
-
+  let topRatedMovie = Data.filter((movies) => movies["IMDB Rating"] >= 8)
+    .sort((a, b) => b["IMDB Rating"] - a["IMDB Rating"])
+    .splice(0, 200);
   const [intitalData, setInitalData] = useState(topRatedMovie);
   // unique genre
   const dupGenre = Data.map((item) => {
@@ -94,14 +93,48 @@ const Filter = () => {
     });
     return title;
   };
+  // filter title by ascending order
   const LowToHigh = () => {
     let newdata = [...intitalData];
     const sortedData = newdata.sort((a, b) => (a.Title > b.Title ? 1 : -1));
     setInitalData(sortedData);
   };
+  // filter title by descending order
   const HighToLow = () => {
     let newdata = [...intitalData];
     const sortedData = newdata.sort((a, b) => (b.Title > a.Title ? 1 : -1));
+    setInitalData(sortedData);
+  };
+  // filter worldwide gross by ascending order
+  const grosstoLow = () => {
+    let newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      a["Worldwide Gross"] > b["Worldwide Gross"] ? 1 : -1
+    );
+    setInitalData(sortedData);
+  };
+  // filter worldwide gross by descending order
+  const grosstoHigh = () => {
+    let newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      b["Worldwide Gross"] > a["Worldwide Gross"] ? 1 : -1
+    );
+    setInitalData(sortedData);
+  };
+  // filter rating  by ascending order
+  const ratingtoLow = () => {
+    const newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      a["IMDB Rating"] > b["IMDB Rating"] ? 1 : -1
+    );
+    setInitalData(sortedData);
+  };
+  // filter rating by descending order
+  const ratingtoHigh = () => {
+    const newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      b["IMDB Rating"] > a["IMDB Rating"] ? 1 : -1
+    );
     setInitalData(sortedData);
   };
   return (
@@ -217,8 +250,36 @@ const Filter = () => {
               <th scope="col">Release date</th>
               <th scope="col">Running time</th>
               <th scope="col">Genre</th>
-              <th scope="col">IMDB Rating</th>
-              <th scope="col">WorldWide Gross </th>
+              <th scope="col">
+                IMDB Rating{" "}
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-down ms-2"
+                    onClick={ratingtoLow}
+                  ></i>
+                </span>
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-up ms-2"
+                    onClick={ratingtoHigh}
+                  ></i>
+                </span>
+              </th>
+              <th scope="col">
+                WorldWide Gross
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-down ms-2"
+                    onClick={grosstoLow}
+                  ></i>
+                </span>
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-up ms-2"
+                    onClick={grosstoHigh}
+                  ></i>
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody>
