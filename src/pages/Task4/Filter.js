@@ -32,6 +32,7 @@ const Filter = () => {
     event.preventDefault();
     updateData = [...Data];
     Object.keys(formdata).map((item) => {
+      console.log(item);
       if (item === "title" && formdata[[item]] !== "") {
         updateData = sortByTitle(updateData, formdata[[item]]);
       }
@@ -137,6 +138,38 @@ const Filter = () => {
     );
     setInitalData(sortedData);
   };
+  // filter running time by ascendong order
+  const runningTimeToLow = () => {
+    const newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      a["Running Time min"] > b["Running Time min"] ? 1 : -1
+    );
+    setInitalData(sortedData);
+  };
+  // filter running time by descending order
+  const runningTimeToHigh = () => {
+    const newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      b["Running Time min"] > a["Running Time min"] ? 1 : -1
+    );
+    setInitalData(sortedData);
+  };
+  // filter start date by ascending order
+  const DateToLow = () => {
+    const newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      new Date(a["Release Date"]) > new Date(b["Release Date"]) ? 1 : -1
+    );
+    setInitalData(sortedData);
+  };
+  // filter start date by descending order
+  const DateToHigh = () => {
+    const newdata = [...intitalData];
+    const sortedData = newdata.sort((a, b) =>
+      new Date(b["Release Date"]) > new Date(a["Release Date"]) ? 1 : -1
+    );
+    setInitalData(sortedData);
+  };
   return (
     <>
       <h1 className="text-center task-heading pt-3">Filter Movie Task</h1>
@@ -160,6 +193,12 @@ const Filter = () => {
         <div class="mb-3">
           <label htmlFor="startDate" class="form-label">
             Start Date
+            <span>
+              <i
+                className="fa-solid fa-arrow-down ms-2"
+                onClick={DateToLow}
+              ></i>
+            </span>
           </label>
           <input
             type="date"
@@ -172,6 +211,9 @@ const Filter = () => {
         <div class="mb-3">
           <label htmlFor="endDate" class="form-label">
             End Date
+            <span>
+              <i className="fa-solid fa-arrow-up ms-2" onClick={DateToHigh}></i>
+            </span>
           </label>
           <input
             type="date"
@@ -248,10 +290,24 @@ const Filter = () => {
                 </span>
               </th>
               <th scope="col">Release date</th>
-              <th scope="col">Running time</th>
+              <th scope="col">
+                Running time
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-down ms-2"
+                    onClick={runningTimeToLow}
+                  ></i>
+                </span>
+                <span>
+                  <i
+                    className="fa-solid fa-arrow-up ms-2"
+                    onClick={runningTimeToHigh}
+                  ></i>
+                </span>
+              </th>
               <th scope="col">Genre</th>
               <th scope="col">
-                IMDB Rating{" "}
+                IMDB Rating
                 <span>
                   <i
                     className="fa-solid fa-arrow-down ms-2"
