@@ -1,7 +1,7 @@
 import React from "react";
-
+import Todo from "./Component/Todo"
 const Task3 = () => {
-  return <div>Task3</div>;
+  return <><Todo/></>;
 };
 
 export default Task3;
