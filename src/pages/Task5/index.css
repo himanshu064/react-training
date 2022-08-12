@@ -44,3 +44,6 @@ h1 {
   outline: none !important;
   border-color: none !important;
 }
+.form-select {
+  width: 10vw !important;
+}
