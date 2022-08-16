@@ -13,7 +13,22 @@ const Filter = () => {
   });
   const HandleChange = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
+    let value = event.target.value;
+    if (name === "rating" && value === "select rating") {
+      value = "";
+    }
+    if (name === "genre" && value === "select genre") {
+      value = "";
+    }
+    if (name === "title" && value === "title") {
+      value = "";
+    }
+    if (name === "startDate" && value === "startDate") {
+      value = "";
+    }
+    if (name === "endDate" && value === "endDate") {
+      value = "";
+    }
     setfromData({ ...formdata, [name]: value });
   };
 
@@ -32,12 +47,14 @@ const Filter = () => {
     let updateData = [...Data];
     Object.keys(formdata).map((item) => {
       if (item === "title" && formdata[[item]] !== "") {
+        console.log(formdata[[item]]);
         updateData = sortByTitle(updateData, formdata[[item]]);
       }
       if (item === "rating" && formdata[[item]] !== "") {
         updateData = sortByFilter(updateData, formdata[[item]]);
       }
       if (item === "genre" && formdata[[item]] !== "") {
+        console.log(formdata[[item]]);
         updateData = sortByGenre(updateData, formdata[[item]]);
       }
       if (
@@ -159,6 +176,7 @@ const Filter = () => {
   // filter running time by ascendong order
   const runningTimeToLow = () => {
     const newdata = [...intitalData];
+
     const sortedData = newdata.sort((a, b) =>
       a["Running Time min"] > b["Running Time min"] ? 1 : -1
     );
@@ -206,6 +224,7 @@ const Filter = () => {
             name="title"
             value={formdata.title}
             onChange={HandleChange}
+            defaultValue="title"
           />
         </div>
         <div class="mb-3">
@@ -224,6 +243,7 @@ const Filter = () => {
             name="startDate"
             value={formdata.startDate}
             onChange={HandleChange}
+            defaultValue="startDate"
           />
         </div>
         <div class="mb-3">
@@ -239,6 +259,7 @@ const Filter = () => {
             name="endDate"
             value={formdata.endDate}
             onChange={HandleChange}
+            defaultValue="endDate"
           />
         </div>
         <div class="mb-3">
