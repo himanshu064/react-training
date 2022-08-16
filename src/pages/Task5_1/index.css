@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --font: "Poppins", sans-serif;
+}
+h1 {
+  font-family: var(--font);
+  text-transform: capitalize;
+  color: #424242;
+}
+.accordion-item {
+  border-radius: 10px !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.accordion-item .accordion-button {
+  font-family: var(--font);
+  text-transform: capitalize;
+  font-size: 1.4rem;
+  color: #424242 !important;
+}
+.accordion-button:not(.collapsed) {
+  color: none !important;
+  background-color: #fafafa !important;
+}
+.accordion-body p {
+  font-family: var(--font);
+  font-size: 1.6rem;
+}
+.accordion-body {
+  background-color: #fafafa !important;
+}
+.accordion-item .accordion-button:focus {
+  box-shadow: none !important;
+}
+.page-btn .btn-primary {
+  background-color: #ff7043 !important;
+  border-color: #ff7043 !important;
+}
+.page-btn .btn-primary :focus {
+  outline: none !important;
+  border-color: none !important;
+}
+.form-select {
+  width: 10vw !important;
+}
