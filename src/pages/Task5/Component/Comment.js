@@ -5,7 +5,7 @@ const Comment = () => {
   const [skip, setSkip] = useState(0);
   const [comment, setComment] = useState([]);
   const [jump, setJump] = useState(0);
-  const jumToComment = [0, 15, 25, 50, 70, 100];
+  const perPage = [0, 15, 25, 50, 70, 100];
   let url = `https://dummyjson.com/comments?limit=${limit}&skip=${skip}`;
   const fetchComment = async () => {
     const response = await fetch(url);
@@ -13,14 +13,14 @@ const Comment = () => {
     setComment(data.comments);
   };
   const HandleChange = (event) => {
-    const JUMP = parseInt(event.target.value);
-    let newSkip = JUMP;
-    setSkip(newSkip);
+    const LIMIT = parseInt(event.target.value);
+    let newLimit = LIMIT;
+    setLimit(newLimit);
     setJump(event.target.value);
   };
   useEffect(() => {
     fetchComment();
-  }, [skip]);
+  }, [skip, limit]);
 
   return (
     <>
@@ -68,7 +68,7 @@ const Comment = () => {
             value={jump}
             onChange={HandleChange}
           >
-            {jumToComment.map((item) => {
+            {perPage.map((item) => {
               return <option value={item}>{item}</option>;
             })}
           </select>
