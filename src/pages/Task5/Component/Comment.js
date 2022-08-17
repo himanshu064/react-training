@@ -93,18 +93,36 @@ const Comment = () => {
               return <option value={item}>{item}</option>;
             })}
           </select>
-          <button
-            className="btn btn-primary"
-            onClick={() => setSkip(skip - limit)}
-          >
-            <i class="fa-solid fa-angle-left"></i>
-          </button>
-          <button
-            className="btn btn-primary mx-4"
-            onClick={() => setSkip(limit + skip)}
-          >
-            <i class="fa-solid fa-angle-right"></i>
-          </button>
+          {skip === 0 ? (
+            <button
+              className="btn btn-primary disabled"
+              onClick={() => setSkip(skip - limit)}
+            >
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary"
+              onClick={() => setSkip(skip - limit)}
+            >
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+          )}
+          {skip <= post.total ? (
+            <button
+              className="btn btn-primary mx-4 disabled"
+              onClick={() => setSkip(limit + skip)}
+            >
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary mx-4"
+              onClick={() => setSkip(limit + skip)}
+            >
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          )}
         </div>
       </section>
     </>
