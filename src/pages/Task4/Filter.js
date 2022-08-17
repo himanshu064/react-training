@@ -4,6 +4,8 @@ import "./index.css";
 import moment from "moment";
 const Filter = () => {
   const rating = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [sorted, setSorted] = useState(false);
+  const [sortedRating, setSortedRating] = useState(false);
   const [formdata, setfromData] = useState({
     title: "",
     startDate: "",
@@ -161,10 +163,11 @@ const Filter = () => {
   const ratingtoLow = () => {
     const newdata = [...intitalData];
     const sortedData = newdata.sort((a, b) =>
-      a["IMDB Rating"] > b["IMDB Rating"] ? 1 : -1
+      Math.round(a["IMDB Rating"]) > Math.round(b["IMDB Rating"]) ? 1 : -1
     );
     setInitalData(sortedData);
   };
+
   // filter rating by descending order
   const ratingtoHigh = () => {
     const newdata = [...intitalData];
@@ -176,7 +179,6 @@ const Filter = () => {
   // filter running time by ascendong order
   const runningTimeToLow = () => {
     const newdata = [...intitalData];
-
     const sortedData = newdata.sort((a, b) =>
       a["Running Time min"] > b["Running Time min"] ? 1 : -1
     );
@@ -205,6 +207,14 @@ const Filter = () => {
       new Date(b["Release Date"]) > new Date(a["Release Date"]) ? 1 : -1
     );
     setInitalData(sortedData);
+  };
+  const ChangeOrderTime = () => {
+    setSorted(!sorted);
+    sorted === true ? runningTimeToHigh() : runningTimeToLow();
+  };
+  const ChangeOrderRating = () => {
+    setSortedRating(!sortedRating);
+    sortedRating === true ? ratingtoHigh() : ratingtoLow();
   };
   return (
     <>
@@ -332,32 +342,34 @@ const Filter = () => {
               <th scope="col">
                 Running time
                 <span>
-                  <i
-                    className="fa-solid fa-arrow-down ms-2"
-                    onClick={runningTimeToLow}
-                  ></i>
-                </span>
-                <span>
-                  <i
-                    className="fa-solid fa-arrow-up ms-2"
-                    onClick={runningTimeToHigh}
-                  ></i>
+                  {sorted === true ? (
+                    <i
+                      className="fa-solid fa-arrow-down-a-z ms-2"
+                      onClick={ChangeOrderTime}
+                    ></i>
+                  ) : (
+                    <i
+                      class="fa-solid fa-arrow-up-z-a"
+                      onClick={ChangeOrderTime}
+                    ></i>
+                  )}
                 </span>
               </th>
               <th scope="col">Genre</th>
               <th scope="col">
                 IMDB Rating
                 <span>
-                  <i
-                    className="fa-solid fa-arrow-down ms-2"
-                    onClick={ratingtoLow}
-                  ></i>
-                </span>
-                <span>
-                  <i
-                    className="fa-solid fa-arrow-up ms-2"
-                    onClick={ratingtoHigh}
-                  ></i>
+                  {sortedRating === true ? (
+                    <i
+                      className="fa-solid fa-arrow-down-a-z ms-2"
+                      onClick={ChangeOrderRating}
+                    ></i>
+                  ) : (
+                    <i
+                      class="fa-solid fa-arrow-up-z-a"
+                      onClick={ChangeOrderRating}
+                    ></i>
+                  )}
                 </span>
               </th>
               <th scope="col">
