@@ -14,21 +14,21 @@ const Infinite = () => {
   };
   useEffect(() => {
     fetchComment();
-  }, [skip]);
-  const fetchMoreData = async () => {
-    let newLimmit = 10 + limit;
-    const newUrl = `https://dummyjson.com/posts?limit=${newLimmit}`;
-    console.log(newUrl);
-    const response = await fetch(newUrl);
-    const data = await response.json();
-    setPost(data.posts);
-    setLimit(newLimmit);
-  };
+  }, []);
   const HandleComment = async (id) => {
     const postUrl = `https://dummyjson.com/posts/${id}/comments`;
     const response = await fetch(postUrl);
     const data = await response.json();
     setPostComment(data.comments);
+  };
+  const fetchMoreData = async () => {
+    let newSkip = skip + limit;
+    let newUrl = `https://dummyjson.com/posts?limit=${limit}&skip=${newSkip}`;
+    const response = await fetch(newUrl);
+    const data = await response.json();
+    const mergeData = [...post, ...data.posts];
+    setPost(mergeData);
+    setSkip(newSkip);
   };
   return (
     <>
@@ -37,8 +37,8 @@ const Infinite = () => {
         <div class="accordion accordion-flush" id="accordionFlushExample">
           <InfiniteScroll
             dataLength={post.length}
+            hasMore={post.length < 150 ? true : false}
             next={fetchMoreData}
-            hasMore={post.length < 340 ? true : false}
             loader={<h4>Loading...</h4>}
           >
             {post.map((item) => {
