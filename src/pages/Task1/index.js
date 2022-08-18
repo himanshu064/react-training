@@ -2,7 +2,7 @@ import React,{useState} from "react";
 
 function ColorChange() {
     
-    const [allobject,setAllobject] = useState([    {"text":"Hello","color":"red"},
+    const [allobject] = useState([    {"text":"Hello","color":"red"},
     {"text":"Hi","color":"green"},
     {"text":"Tata","color":"yellow"},
     {"text":"Bye","color":"blue"},

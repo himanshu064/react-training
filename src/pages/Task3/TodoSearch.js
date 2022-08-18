@@ -7,7 +7,7 @@ function TodoSearch( params ) {
         numberOfActiveTasks&&numberOfActiveTasks.map((item) => {
             if (item.completed === false) {
                 return total++;
-            } 
+            }
         })
     const [text,setText] = useState("")
     //Add Function

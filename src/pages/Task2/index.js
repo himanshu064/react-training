@@ -7,7 +7,7 @@ function TableForAny(props){
     length = parseInt(length)
    
     function range(length) {
-        if (length==undefined) {
+        if (length===undefined) {
             return Array(10).fill().map((_, idx) => idx+1 )
         }
         else{
@@ -16,7 +16,7 @@ function TableForAny(props){
         
       }
       var result = range(length); 
-      const [times,setTimes] = useState(result)
+      const [times] = useState(result)
    
     
 
