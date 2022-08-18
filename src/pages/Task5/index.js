@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Posts from "./posts";
 import AccordionComponent from "./Accordion";
 import App from "./Pagination";
 import "./rc-select.css"
@@ -10,11 +9,6 @@ function Pagination() {
     const [loading, setLoading] = useState(false)
     const [currentpage, setCurrenpage] = useState(1)
     const [postsperpage, setpostperpage] = useState(10)
-
-
-    // fetch('https://dummyjson.com/products/1')
-    // .then(res => res.json())
-    // .then(json => console.log(json))
 
     function pageNumberIs(pageNum,pageSize){
         console.log(pageNum,"pagenumber")
@@ -41,6 +35,4 @@ function Pagination() {
         <App pageNumberIs={pageNumberIs} postsperpage={postsperpage} totalPosts={posts.length} />
     </div>
 }
-
-
 export default Pagination;
