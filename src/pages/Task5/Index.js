@@ -1,83 +1,101 @@
-import React, { useEffect, useState } from 'react';
-import "./App.css";
+import React, { useEffect, useState } from 'react'
+import Pagination from './Pagination';
 
 export default function Index() {
-  const [items, setItems] = useState([]);
-  const [limit, setLimit] = useState(10);
-  const [skip, setSkip] = useState(0);
-  const [move, setMove] = useState(0);
-  const moveComment = [0, 25, 50, 75, 100];
+  const [post, setPost] = useState ([]);
+  const [comment, setComment] = useState ([]);
+  const [limit, setLimit] = useState (10);
+  const [skip, setSkip] = useState (0);
+  const [move, setMove] = useState (0);
+  const [total , setTotal] = useState(0)
+  const jumpToPage = [0,25,50,75,100];
 
-  const url = `https://dummyjson.com/comments?limit=${limit}&skip=${skip}`;
-  // function getData(){
-  //   fetch(url)
-  //   .then ((response) =>{
-  //     return response.json();
-  //   })
-  //   .then((data) =>{
-  //     setItems (data.comments)
-  //   });
-  // }
-  //   getData();
+  useEffect(()=>{
+    getposts() 
+    // eslint-disable-next-line
+  },[skip,limit])
 
-  const getData = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    setItems(data.comments);
-  };
+  // Fetching Posts
+  const getposts =async ()=>{
+    const url = `https://dummyjson.com/posts?limit=${limit}&skip=${skip}`;
+    const data = await fetch (url);
+    const parseData = await data.json()
+    setPost (parseData.posts)
+    setTotal (parseData.total) 
+  }
 
-  useEffect(() => {
-    getData()
-  }, [skip, limit]);
+  // Fetching Comments
+  const getcomments =async (key)=>{
+    const url = `https://dummyjson.com/posts/${key}/comments`;
+    const data = await fetch (url);
+    const parseData = await data.json()
+    setComment (parseData.comments)
+  }
 
-  const HandleChange = (event) => {
-    const LIMIT = parseInt(event.target.value);
-    const newLimit = LIMIT;
-    setLimit(newLimit);
+  const HandleChange = (event)=>{
+    const LIMIT =(event.target.value);
+    setLimit(LIMIT);
     setMove(event.target.value);
   };
-  const clickNext =() =>{
-    
-    setSkip(skip + limit)
-  };
-  const clickPre =() =>{
-    setSkip(skip - limit)
-  };
+
+  const HandleClick=(key)=>{
+  getcomments(key)
+  }
+
+  // For Pagination
+  const paginate = async(pagenumber)=>{
+     const url = `https://dummyjson.com/posts?limit=${limit}&skip=${(pagenumber - 1)*limit}`;
+    const data = await fetch (url);
+    const parseData = await data.json()
+    setPost (parseData.posts) 
+  }
+ 
+
   return (
-    <>
-      <h3 className='heading' > Fetching Comments Through API </h3>
-      {items.map((key) => {
-        return (
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id={`flush-heading${key.id}`}>
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${key.id}`} aria-expanded="false" aria-controls={`flush-collapse${key.id}`}>
-      <h5 username> UserName: {key.user.username} </h5>
+
+    // View Port Of Task
+    // Fetching Data Of Body
+    <div>
+      <h2 className='heading'>Fetching Posts From API </h2>
+      <div className="accordion accordion-flush" id="accordionFlushExample">
+       {post.map((element)=>{
+        return(
+          <div className="accordion-item">
+    <h2 className="accordion-header" id={`flush-heading${element.id}`}>
+      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${element.id}`} aria-expanded="false" aria-controls={`flush-collapse${element.id}`} onClick={()=>HandleClick(element.id)}>
+      <h5> Title: {element.title} </h5>
       </button>
     </h2>
-    <div id={`flush-collapse${key.id}`} class="accordion-collapse collapse" aria-labelledby={`flush-heading${key.id}`} data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body"><h5 className='bodyitem'>Comment: {key.body} </h5>
-       <h5 className='bodyitem'> ID: {key.id} </h5>
-       <h5 className='bodyitem'>Post ID: {key.postId} </h5></div>
+    <div id={`flush-collapse${element.id}`} className="accordion-collapse collapse" aria-labelledby={`flush-heading${element.id}`} data-bs-parent="#accordionFlushExample">
+      <div className="accordion-body">
+        <>
+        <h5 className='bodyitem'> Body: {element.body} </h5>
+        <h5 className='bodyitem'> Id: {element.id} </h5>
+        </>
+    {comment.map((item)=>{
+      return(
+        <>  
+        <h5 className='bodyitem'>Comment: {item.body}</h5>
+        </>
+      )
+    })}
+       </div>
     </div>
   </div>
-  </div>
-        )
-      })}
-
-      <div>
-        <div className='d-flex justify-content-end mt-4 mb-3 page-btn'>
+)
+})}
+   {/* All Buttons */}
+    <div className='d-flex justify-content-end mt-4 mb-3 page-btn'>
           <select className='form-select mx-3 jump' aria-label="Default select example" value={move} onChange={HandleChange}>
-            {moveComment.map((item) => {
-              return <option key="{item}" >{item}</option>;
+            {jumpToPage.map((element) => {
+              return <option key="{element}" >{element}</option>;
             })}
           </select>
         </div>
-        <button disabled={skip === 330} className="btn" onClick={clickNext} > Next </button>
-        <button disabled={skip===0} className="btn" onClick={clickPre} > Previous </button>
-        {/* <button disabled={skip===1000} className="btn" onClick={() => setSkip(skip + limit)} > Next </button>
-        <button disabled={skip===0} className="btn" onClick={() => setSkip(skip - limit)} > Previous </button> */}
-      </div>
-    </>
+  </div>
+        <button disabled={skip===0} className="btn" onClick={() => setSkip(skip - limit)} > Previous </button>
+           <Pagination postperpage={limit} totalPosts={total} paginate={paginate}/>
+        <button  className="btn" onClick={() => setSkip (parseInt (skip) + parseInt (limit))} > Next </button>
+    </div>
   )
 }
