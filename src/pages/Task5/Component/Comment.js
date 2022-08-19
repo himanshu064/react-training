@@ -7,11 +7,14 @@ const Comment = () => {
   const [jump, setJump] = useState(0);
   const [postComment, setPostComment] = useState([]);
   const perPage = [0, 15, 25, 50, 70, 100];
+  const [total, seTotal] = useState(0);
+  let pageNumber = [];
   let url = `https://dummyjson.com/posts?limit=${limit}&skip=${skip}`;
   const fetchPost = async () => {
     const response = await fetch(url);
     const data = await response.json();
     setPost(data.posts);
+    seTotal(data.total);
   };
   const HandleChange = (event) => {
     const LIMIT = parseInt(event.target.value);
@@ -25,10 +28,21 @@ const Comment = () => {
     const data = await response.json();
     setPostComment(data.comments);
   };
+  for (let i = 1; i <= Math.ceil(total / limit); i++) {
+    pageNumber.push(i);
+  }
+
   useEffect(() => {
     fetchPost();
   }, [skip, limit]);
-
+  const HandlePerPage = async (page) => {
+    const url = `https://dummyjson.com/posts?limit=${limit}&skip=${
+      (page - 1) * limit
+    }`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setPost(data.posts);
+  };
   return (
     <>
       <h1 className="text-center pt-4">Comment task</h1>
@@ -108,6 +122,22 @@ const Comment = () => {
               <i class="fa-solid fa-angle-left"></i>
             </button>
           )}
+          <nav aria-label="Page navigation example">
+            <ul className="pagination">
+              {pageNumber.map((page, index) => {
+                return (
+                  <li className="page-item" key={index}>
+                    <a
+                      className="page-link"
+                      onClick={() => HandlePerPage(page)}
+                    >
+                      {page}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
           {skip <= post.total ? (
             <button
               className="btn btn-primary mx-4 disabled"

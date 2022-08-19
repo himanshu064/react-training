@@ -56,3 +56,10 @@ h2 {
   font-family: var(--font);
   font-size: 1.3rem !important;
 }
+.pagination {
+  margin-bottom: 0 !important;
+  margin-left: 30px;
+}
+.page-link {
+  color: #ff7043 !important;
+}
