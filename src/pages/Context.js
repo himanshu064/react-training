@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../pages/Task7/Component/Firebase";
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
+  // Task 3 Context Start
   const getLocalTask = () => {
     if (JSON.parse(localStorage.getItem("Task")) === null) {
       return [];
@@ -77,6 +80,20 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("Task", JSON.stringify(StatusChange));
     setChecked(true);
   };
+  // task 3 context end
+
+  // task 7 context start
+  const [isUser, setisUser] = useState({});
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setisUser(user);
+      } else {
+        setisUser(null);
+      }
+    });
+  }, []);
+  // task 7 context end
   return (
     <AppContext.Provider
       value={{
@@ -91,6 +108,7 @@ const AppProvider = ({ children }) => {
         DeleteTask,
         HandleAllTask,
         checked,
+        isUser,
       }}
     >
       {children}

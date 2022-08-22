@@ -5,6 +5,11 @@ import Task3 from "./pages/Task3";
 import Task4 from "./pages/Task4";
 import Task5 from "./pages/Task5";
 import Task5_1 from "./pages/Task5_1";
+import Welcome from "./pages/Task7/Component/Welcome";
+import Login from "./pages/Task7/Component/Login";
+import Register from "./pages/Task7/Component/Register";
+import ProtectedRoute from "./pages/Task7/Component/ProtectedRoute";
+import ProtectedLogReg from "./pages/Task7/Component/ProtectedLogReg";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +20,30 @@ function App() {
         <Route path="/task4" element={<Task4 />} />
         <Route path="/task5" element={<Task5 />} />
         <Route path="/task5_1" element={<Task5_1 />} />
+        <Route
+          path="task7/welcome"
+          element={
+            <ProtectedRoute>
+              <Welcome />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="task7/login"
+          element={
+            <ProtectedLogReg>
+              <Login />
+            </ProtectedLogReg>
+          }
+        />
+        <Route
+          path="task7/register"
+          element={
+            <ProtectedLogReg>
+              <Register />
+            </ProtectedLogReg>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
