@@ -21,7 +21,7 @@ export default function Index() {
     const data = await fetch (url);
     const parseData = await data.json()
     setPost (parseData.posts)
-    setTotal (parseData.total) 
+    setTotal (parseData.total)
   }
 
   // Fetching Comments
@@ -50,7 +50,6 @@ export default function Index() {
     setPost (parseData.posts) 
   }
  
-
   return (
 
     // View Port Of Task
@@ -58,9 +57,9 @@ export default function Index() {
     <div>
       <h2 className='heading'>Fetching Posts From API </h2>
       <div className="accordion accordion-flush" id="accordionFlushExample">
-       {post.map((element)=>{
+       {post.map((element, index)=>{
         return(
-          <div className="accordion-item">
+          <div className="accordion-item" key={index}>
     <h2 className="accordion-header" id={`flush-heading${element.id}`}>
       <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${element.id}`} aria-expanded="false" aria-controls={`flush-collapse${element.id}`} onClick={()=>HandleClick(element.id)}>
       <h5> Title: {element.title} </h5>
@@ -72,10 +71,10 @@ export default function Index() {
         <h5 className='bodyitem'> Body: {element.body} </h5>
         <h5 className='bodyitem'> Id: {element.id} </h5>
         </>
-    {comment.map((item)=>{
+    {comment.map((item, ind)=>{
       return(
         <>  
-        <h5 className='bodyitem'>Comment: {item.body}</h5>
+        <h5 className='bodyitem' key={ind}>Comment: {item.body}</h5>
         </>
       )
     })}
