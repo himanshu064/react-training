@@ -10,6 +10,7 @@ import Login from "./pages/Task7/Component/Login";
 import Register from "./pages/Task7/Component/Register";
 import ProtectedRoute from "./pages/Task7/Component/ProtectedRoute";
 import ProtectedLogReg from "./pages/Task7/Component/ProtectedLogReg";
+import UploadImage from "./pages/Task7/Component/UploadImage";
 function App() {
   return (
     <BrowserRouter>
@@ -44,6 +45,7 @@ function App() {
             </ProtectedLogReg>
           }
         />
+        <Route path="task7/uploadImage" element={<UploadImage />} />
       </Routes>
     </BrowserRouter>
   );

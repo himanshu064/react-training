@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./index.css";
 import { auth, db } from "./Firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 const Register = () => {
   const [user, setUser] = useState({
@@ -30,13 +30,13 @@ const Register = () => {
         user.Password
       );
       window.alert(result.user.email);
+      // creating collection in firebase
       await addDoc(collection(db, "User"), {
         Email: user.Email,
         Password: user.Password,
       });
       window.alert(`resgistered Succesfully ${result.user.email}`);
-
-      window.location = "/task7/welcome";
+      <Navigate to="/task7/welcome" />;
     } catch (error) {
       window.alert(error.message);
     }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 import { auth } from "./Firebase";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -33,7 +33,7 @@ const Register = () => {
         user.Password
       );
       window.alert(`login Succesfully ${result.user.email}`);
-      window.location = "/task7/welcome";
+      <Navigate to="/task7/welcome" />;
     } catch (error) {
       window.alert(error.message);
     }
@@ -43,7 +43,7 @@ const Register = () => {
     signInWithPopup(auth, googleProvider)
       .then((res) => {
         window.alert(`login succesfully welcome ${res.user.email}`);
-        window.location = "/task7/welcome";
+        <Navigate to="/task7/welcome" />;
       })
       .catch((error) => {
         window.alert(error);
