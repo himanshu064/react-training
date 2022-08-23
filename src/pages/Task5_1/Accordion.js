@@ -37,7 +37,6 @@ function AccordionComponent({ postsperpage }) {
           loader={<h4>Loading...</h4>}>
           {posts.map((item, index) => {
             return (
-
               <Accordion.Item key={index} eventKey={index + 1} style={{
                 margin: 16
               }}>
@@ -47,9 +46,7 @@ function AccordionComponent({ postsperpage }) {
                   {comments.map((item, index) => { return <p key={index} style={{ color: "blue" }}>{item.user.username} : {item.body}</p> })}
                 </Accordion.Body>
               </Accordion.Item>
-
             )
-
           })}
         </InfiniteScroll>
       </Accordion>
