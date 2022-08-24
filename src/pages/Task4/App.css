@@ -19,9 +19,9 @@
     color: green;
     margin: 2px;
   }
-  form{
+  .form{
     border: 2px solid green;
-    background-color: green;
+    background-color: red;
   }
   .na{
     color: red;

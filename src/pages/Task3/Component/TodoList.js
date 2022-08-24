@@ -1,4 +1,4 @@
-import react from "react";
+// import react from "react";
 import { useGlobalContext } from "../../Context";
 
 const TodoList = ()=>{
