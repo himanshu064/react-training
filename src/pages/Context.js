@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../pages/Task7/Component/Firebase";
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
@@ -109,8 +109,7 @@ const AppProvider = ({ children }) => {
         HandleAllTask,
         checked,
         isUser,
-      }}
-    >
+      }}>
       {children}
     </AppContext.Provider>
   );

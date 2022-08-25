@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "../index.css";
 const Infinite = () => {
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [skip, setSkip] = useState(0);
   const [post, setPost] = useState([]);
   const [postComment, setPostComment] = useState([]);
@@ -39,8 +39,7 @@ const Infinite = () => {
             dataLength={post.length}
             hasMore={post.length < 150 ? true : false}
             next={fetchMoreData}
-            loader={<h4>Loading...</h4>}
-          >
+            loader={<h4>Loading...</h4>}>
             {post.map((item) => {
               const { body, title, id } = item;
               return (
@@ -53,8 +52,7 @@ const Infinite = () => {
                       data-bs-target={`#flush-collapse${id}`}
                       aria-expanded="false"
                       aria-controls={`flush-collapse${id}`}
-                      onClick={() => HandleComment(id)}
-                    >
+                      onClick={() => HandleComment(id)}>
                       {title}
                     </button>
                   </h2>
@@ -62,15 +60,13 @@ const Infinite = () => {
                     id={`flush-collapse${id}`}
                     class="accordion-collapse collapse"
                     aria-labelledby={`flush-heading${id}`}
-                    data-bs-parent="#accordionFlushExample"
-                  >
+                    data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                       <span className="Post-body pb-3">Post :- </span>
                       <p>{body}</p>
                       <h1
                         className="text-center"
-                        style={{ fontSize: "1.7rem" }}
-                      >
+                        style={{ fontSize: "1.7rem" }}>
                         Comment's
                       </h1>
                       {postComment.map((item) => {
@@ -79,8 +75,7 @@ const Infinite = () => {
                         return (
                           <div
                             className="d-flex justify-content-between align-items-center comment"
-                            key={id}
-                          >
+                            key={id}>
                             <h1 style={{ color: "#ff7043" }}>{username}</h1>
                             <h2 style={{ color: "#66bb6a" }}>{body}</h2>
                           </div>

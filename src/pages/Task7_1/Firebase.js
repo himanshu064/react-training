@@ -1,0 +1,10 @@
+import Firebaseconfig from "./Config/Firebaseconfig";
+import { getAuth } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+const firebaseapp = initializeApp(Firebaseconfig);
+const auth = getAuth(firebaseapp);
+const db = getFirestore(firebaseapp);
+const storage = getStorage(firebaseapp);
+export { auth, db, storage };
