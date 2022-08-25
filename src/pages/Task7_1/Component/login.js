@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import GoogleButton from "react-google-button";
 import { useDispatch } from "react-redux";
 import "../index.css";
 import { handleSubmit } from "../Redux/Slices/LoginSlice";
+import { HandleGoogleLogin } from "../Redux/Slices/SignWithGoogle";
 const Login = () => {
   const [user, setUser] = useState({
     Email: "",
@@ -25,6 +27,9 @@ const Login = () => {
       })
     );
   };
+  const googleLogin=()=>{
+    dispatch(HandleGoogleLogin())
+  }
   return (
     <>
       <div className="task_bg d-flex justify-content-center align-items-center">
@@ -58,6 +63,7 @@ const Login = () => {
           <button className="btn btn-primary" type="submit">
             Login
           </button>
+          <GoogleButton  style={{ width: "auto", marginTop: "10px" }} onClick={googleLogin}/>
         </form>
       </div>
     </>

@@ -9,8 +9,8 @@ let LoginSlice = createSlice({
   initialState: initialState,
   reducers: {
     handleSubmit: async (state, actions) => {
-      state.user = actions.payload;
-      if (!state.user) {
+      state.user=actions.payload
+      if (!state.user.Email || !state.user.Password) {
         alert("Please fill out the filed");
       }
       try {
@@ -23,8 +23,9 @@ let LoginSlice = createSlice({
       } catch (error) {
         alert(error);
       }
+  window.location="/task7Redux/welcome"
     },
   },
 });
-export const { handleSubmit } = LoginSlice.actions;
+export const { handleSubmit,AuthUser } = LoginSlice.actions;
 export default LoginSlice.reducer;

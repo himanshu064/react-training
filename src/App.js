@@ -12,6 +12,7 @@ import ProtectedRoute from "./pages/Task7/Component/ProtectedRoute";
 import ProtectedLogReg from "./pages/Task7/Component/ProtectedLogReg";
 import UploadImage from "./pages/Task7/Component/UploadImage";
 import Task7_1 from "./pages/Task7_1";
+import WelcomeRedux from "./pages/Task7_1/Component/welcomeRedux";
 function App() {
   return (
     <BrowserRouter>
@@ -48,6 +49,7 @@ function App() {
         />
         <Route path="task7/uploadImage" element={<UploadImage />} />
         <Route path="task7Redux" element={<Task7_1 />} />
+        <Route path="task7Redux/welcome" element={<WelcomeRedux />} />
       </Routes>
     </BrowserRouter>
   );
