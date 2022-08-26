@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import "../index.css";
 import { handleSubmit } from "../Redux/Slices/LoginSlice";
 import { HandleGoogleLogin } from "../Redux/Slices/SignWithGoogle";
+import { Link } from "react-router-dom"
 const Login = () => {
   const [user, setUser] = useState({
     Email: "",
@@ -64,6 +65,9 @@ const Login = () => {
             Login
           </button>
           <GoogleButton  style={{ width: "auto", marginTop: "10px" }} onClick={googleLogin}/>
+          <Link to="/task7Redux/register" className="nav-link">
+            Register here
+          </Link>
         </form>
       </div>
     </>

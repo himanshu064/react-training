@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { GoogleAuthProvider,signInWithPopup } from "firebase/auth";
 import { auth } from "../../Firebase";
 const initialState={
-    GoogleUser:null
 }
 let GoogleSlice=createSlice({
     name:"Google_login",
@@ -11,7 +10,8 @@ let GoogleSlice=createSlice({
         HandleGoogleLogin:(state)=>{
             const googleProvider = new GoogleAuthProvider();
             signInWithPopup(auth,googleProvider).then((res)=>{
-                console.log(res);
+                window.alert(`login succesfully welcome ${res.user.email}`);
+                window.location="/task7Redux/welcome"
             }).catch(error=>{
                 console.log(error)
             })

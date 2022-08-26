@@ -20,10 +20,11 @@ let LoginSlice = createSlice({
           state.user.Password
         );
         alert(`login successfully ${result.user.email}`);
+        window.location="/task7Redux/welcome"
       } catch (error) {
         alert(error);
       }
-  window.location="/task7Redux/welcome"
+  
     },
   },
 });
