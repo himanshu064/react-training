@@ -2,8 +2,8 @@ import React, { createContext, useEffect, useState } from "react";
 import TodoSearch from "./TodoSearch";
 import TodoTable from "./TodoTable";
 import TodoFilters from "./TodoFilters";
-export const TodoContext = createContext();
 
+export const TodoContext = createContext();
 const TodoContextState = (props) => {
   const [allTasks, setTasks] = useState([])
   useEffect(() => {
