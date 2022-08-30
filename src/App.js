@@ -14,6 +14,8 @@ import UploadImage from "./pages/Task7/Component/UploadImage";
 import Task7_1 from "./pages/Task7_1";
 import WelcomeRedux from "./pages/Task7_1/Component/welcomeRedux";
 import RegisterRedux from "./pages/Task7_1/Component/RegisterRedux";
+import About from "./pages/Task7/Component/About";
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,32 +26,16 @@ function App() {
         <Route path="/task4" element={<Task4 />} />
         <Route path="/task5" element={<Task5 />} />
         <Route path="/task5_1" element={<Task5_1 />} />
-        <Route
-          path="task7/welcome"
-          element={
-            <ProtectedRoute>
-              <Welcome />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="task7/login"
-          element={
-            <ProtectedLogReg>
-              <Login />
-            </ProtectedLogReg>
-          }
-        />
-        <Route
-          path="task7/register"
-          element={
-            <ProtectedLogReg>
-              <Register />
-            </ProtectedLogReg>
-          }
-        />
-        <Route path="task7/uploadImage" element={<UploadImage />} />
+        <Route element={<ProtectedLogReg />}>
+          <Route path="task7/login" element={<Login />}></Route>
+          <Route path="task7/register" element={<Register />}></Route>
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/task7/welcome" element={<Welcome />}></Route>
+          <Route path="/task7/about" element={<About />}></Route>
+        </Route>
         <Route path="task7Redux" element={<Task7_1 />} />
+        <Route path="task7/uploadImage" element={<UploadImage />} />
         <Route path="task7Redux/welcome" element={<WelcomeRedux />} />
         <Route path="task7Redux/register" element={<RegisterRedux />} />
       </Routes>

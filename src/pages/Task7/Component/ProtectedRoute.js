@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useGlobalContext } from "../../Context";
 const ProtectedRoute = ({ children }) => {
   const { isUser } = useGlobalContext();
@@ -7,6 +7,6 @@ const ProtectedRoute = ({ children }) => {
   if (!isUser) {
     return <Navigate to="/task7/login" />;
   }
-  return children;
+  return children ? children : <Outlet />;
 };
 export default ProtectedRoute;
