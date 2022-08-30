@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Data from "./Data";
-import "./App.css";
+import classes from "./App.module.css";
 import moment from "moment";
 const Index = () => {
   const rating = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -152,7 +152,7 @@ const Index = () => {
 
   return (
     <>
-      <h1 className="heading">Welcome In Movies World</h1>
+      <h1 className={classes.heading}>Welcome In Movies World</h1>
       {/* filter section */}
       <form 
         className="filter-form d-flex justify-content-around  align-items-center  flex-row  form"

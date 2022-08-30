@@ -1,11 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from './pages/Task7/Components/Login';
+import Register from './pages/Task7/Components/Register';
+import Welcome from './pages/Task7/Components/Welcome';
+import ProtectedRoute from './pages/Task7/Components/ProtectedRoute';
+import ProtectedLogReg from './pages/Task7/Components/ProtectedLogReg';
+
 import Task1 from "./pages/Task1";
 import Task2 from "./pages/Task2";
 import Task3 from "./pages/Task3/index";
 import Task4 from "./pages/Task4/Index";
 import Task5 from "./pages/Task5/Index";
 import Task5_1 from "./pages/Task5_1/Index";
-import Task7 from "./pages/Task7/Components/Login";
 
 function App() {
   return (
@@ -17,7 +22,22 @@ function App() {
         <Route path='/task4' element={<Task4 />} />
         <Route path='/task5' element={<Task5 />} />
         <Route path='/task5_1' element={<Task5_1 />} />
-        <Route path='/task7' element={<Task7 />} />
+        <Route path='/welcome' element={
+          <ProtectedRoute>
+            <Welcome />
+          </ProtectedRoute>
+        } />
+        <Route path='/login' element={
+          <ProtectedLogReg>
+            <Login />
+          </ProtectedLogReg> 
+        } />
+        <Route path='/register' element={
+          <ProtectedLogReg>
+           <Register />
+          </ProtectedLogReg> 
+        } />
+       
       </Routes>
     </BrowserRouter>
   );

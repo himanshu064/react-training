@@ -1,4 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
+import {onAuthStateChanged} from 'firebase/auth';
+import {auth} from './Firebase/firebase';
 
 const Context = React.createContext();
 
@@ -13,6 +15,7 @@ const Provider = ({children}) =>{
     const [task, setTask] = useState("");
     const [allTask, setAllTask] = useState(localTask());
     const [check, setCheck] = useState("false");
+    const [isUser, setisUser] = useState ({});
 
     const HandleChange =(event) =>{
         setTask(event.target.value)
@@ -89,6 +92,17 @@ const Provider = ({children}) =>{
     setCheck(true);
     };
 
+
+    useEffect (() =>{
+        onAuthStateChanged (auth, (user) =>{
+            if (user) {
+                setisUser (user);
+            }else {
+                setisUser (null);
+            }
+        });
+    },[]);
+
     return (
         <Context.Provider value={{
             task,
@@ -101,7 +115,8 @@ const Provider = ({children}) =>{
             HandleActive,
             HandleComplete,
             DeleteTask,
-            HandleAllTask
+            HandleAllTask,
+            isUser
         }}>
          {children}
         </Context.Provider>

@@ -4,6 +4,7 @@ import App from "./App";
 import { Provider } from "./pages/Context";
 import "./index.css";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
