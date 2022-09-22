@@ -1,13 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Task1 from "./pages/Task1";
+import React from 'react';
+import Render from "./Task1/Render";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/task1' element={<Task1 />} />
-      </Routes>
-    </BrowserRouter>
+   <>
+   <Render/>
+   </>
   );
 }
 
