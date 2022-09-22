@@ -1,32 +1,27 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./FireBase";
-export const WebsiteContext = createContext();
+import { useDispatch, useSelector } from "react-redux";
+import { userLogIn } from "./action";
 
-export const WebsiteContextState = (props) => {
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState([])
+function FirstPage() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     useEffect(()=>{
         onAuthStateChanged(auth,(user) => {
-            if (user) setUser(user)
-            else setUser("noData")
-           
+            if (user) dispatch(userLogIn(user))
+            else dispatch(userLogIn("noData"))
         })
     },[])
     
-    return (
-        <WebsiteContext.Provider value={{user, loggedIn }}>
-            {props.children}
-        </WebsiteContext.Provider>
-    )
-}
-function FirstPage() {
-    const userData = useContext(WebsiteContext);
-    const navigate = useNavigate()
-    if (userData.user!=="noData") {
-        navigate("/task7/home")
+    const userData = useSelector((state) => state.Data )
+    console.log(userData,"userdata")
+
+    
+    if (userData!=="noData") {
+        navigate("/task8/home")
     }
     return  (
         <section>

@@ -44,9 +44,9 @@ tbody, td, tr,th{
 [type=text]{
     font-size: initial;
 }
-form{
+.form{
     display: flex;
-    margin: auto;  
+    margin: auto;
     justify-content: center;
 }
 .formpaddingdiv{
@@ -54,6 +54,10 @@ form{
 }
 .textfields{
     width: 300px;
+}
+.formlable{
+    margin: auto;
+    padding-right: 4px;
 }
 table{
     border-spacing: 0px;
@@ -68,8 +72,8 @@ table{
 }
 .formdata{
     display: flex;
-    padding: 8px;
-    font-size: 26px;
+    padding: 5px;
+    font-size: 18px;
 }
 button{
     background-color: rgb(224, 253, 255);
