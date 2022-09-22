@@ -1,0 +1,10 @@
+#myBox{
+    border: 2px solid black;
+    }
+    #preview{
+    white-space: pre;
+    }
+    .preview pre{
+        white-space:pre-wrap;
+    /* white-space: pre-line; */
+    }
