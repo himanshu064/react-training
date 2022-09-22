@@ -1,17 +1,28 @@
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Task1 from "./pages/Task1";
-import Task2 from "./pages/Task2";
-import Task3 from "./pages/Task3";
+import Home from "./Task9/pages/Home";
+import Navbar from "./Task9/components/Navbar";
+import Register from "./Task9/pages/Register";
+import Login from "./Task9/pages/Login";
+import Profile from './Task9/pages/Profile'
+import PrivateRoute from "./Task9/components/PrivateRoute";
+import PrivateLog from "./Task9/components/PrivateLog";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/task1' element={<Task1 />} />
-        <Route path='/task2' element={<Task2 />} />
-        <Route path='/task3' element={<Task3 />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+        <Route element={<PrivateRoute/>}>
+          <Route path="/" element={<Home/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
+        </Route>
+        <Route element={<PrivateLog/>}>
+          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/register" element={<Register/>}></Route>
+        </Route>
+        </Routes>
+      </BrowserRouter>
   );
 }
 

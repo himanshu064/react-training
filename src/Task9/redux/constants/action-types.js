@@ -1,0 +1,5 @@
+export const ActionTypes = {
+    SET_LOGIN:"SET_LOGIN",
+    SET_REGISTER:"SET_REGISTER",
+    SET_LOGIN_WITH_GOOGLE:"SET_LOGIN_WITH_GOOGLE",
+};
