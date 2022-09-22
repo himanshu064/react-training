@@ -1,15 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Task1 from "./pages/Task1";
-import Task2 from "./pages/Task2";
-import Task3 from "./pages/Task3";
+import Login from './Task7/Login';
+import Register from './Task7/Register';
+import Welcome from './Task7/Welcome';
+import ProtectedRoute from './Task7/ProtectedRoute';
+import ProtectedLogReg from './Task7/ProtectedLogReg';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/task1' element={<Task1 />} />
-        <Route path='/task2' element={<Task2 />} />
-        <Route path='/task3' element={<Task3 />} />
+      <Route path='/' element={
+          <ProtectedRoute>
+            <Welcome />
+          </ProtectedRoute>
+        } />
+        <Route path='/login' element={
+          <ProtectedLogReg>
+            <Login />
+          </ProtectedLogReg> 
+        } />
+        <Route path='/register' element={
+          <ProtectedLogReg>
+           <Register />
+          </ProtectedLogReg> 
+        } />
       </Routes>
     </BrowserRouter>
   );
