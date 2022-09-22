@@ -1,17 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Task1 from "./pages/Task1";
-import Task2 from "./pages/Task2";
-import Task3 from "./pages/Task3";
+import Task7, { WebsiteContextState } from "./pages/Task7";
+import Home from "./pages/Task7/Home";
+import Login from "./pages/Task7/Login";
+import SignUpPage from "./pages/Task7/SignUp";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/task1' element={<Task1 />} />
-        <Route path='/task2' element={<Task2 />} />
-        <Route path='/task3' element={<Task3 />} />
-      </Routes>
-    </BrowserRouter>
+    <WebsiteContextState>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Task7 />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </WebsiteContextState>
   );
 }
 
