@@ -2,6 +2,7 @@ import { signOut } from 'firebase/auth';
 import {auth} from "../Firebase/firebase";
 import React from 'react'
 import { useGlobalContext } from '../Context';
+import {Link} from 'react-router-dom';
 
 function Welcome() {
   const {isUser} = useGlobalContext();
@@ -14,6 +15,9 @@ function Welcome() {
     <form className='container'>
     <h2 className='loginhead'> Welcome Page </h2>
 <br />
+<div className="about">
+    <Link to='/about'>About</Link>
+</div>
     <div className="userdata text-center  userdata">
         <h4> User Details</h4>
        <h5>User Email:- {isUser.email} </h5> 

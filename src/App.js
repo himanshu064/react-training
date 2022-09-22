@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './Task7/Login';
 import Register from './Task7/Register';
 import Welcome from './Task7/Welcome';
+import About from './Task7/About';
 import ProtectedRoute from './Task7/ProtectedRoute';
 import ProtectedLogReg from './Task7/ProtectedLogReg';
 
@@ -12,6 +13,11 @@ function App() {
       <Route path='/' element={
           <ProtectedRoute>
             <Welcome />
+          </ProtectedRoute>
+        } />
+      <Route path='/about' element={
+          <ProtectedRoute>
+            <About />
           </ProtectedRoute>
         } />
         <Route path='/login' element={
