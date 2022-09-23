@@ -4,7 +4,9 @@ import Task2 from "./pages/Task2";
 import Task3 from "./pages/Task3";
 
 function App() {
+  console.log('abhi');
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path='/task1' element={<Task1 />} />
