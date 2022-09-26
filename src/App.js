@@ -1,15 +1,25 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Task1 from "./pages/Task1";
-import Task2 from "./pages/Task2";
-import Task3 from "./pages/Task3";
-
+import ProtectedLogReg from "./ProtectedLogReg";
+import Login from "./Login";
+import Register from "./Register";
+import ProtectedRoute from "./ProtectedRoute";
+import Welcome from "./Welcome";
+import About from "./About";
+import UploadImage from "./UploadImage";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/task1' element={<Task1 />} />
-        <Route path='/task2' element={<Task2 />} />
-        <Route path='/task3' element={<Task3 />} />
+        <Route element={<ProtectedLogReg />}>
+          <Route path="task7/login" element={<Login />}></Route>
+          <Route path="task7/register" element={<Register />}></Route>
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/task7/welcome" element={<Welcome />}></Route>
+          <Route path="/task7/about" element={<About />}></Route>
+          <Route path="task7/uploadImage" element={<UploadImage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
