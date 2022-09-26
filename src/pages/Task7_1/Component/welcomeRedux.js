@@ -16,7 +16,6 @@ const WelcomeRedux = () => {
     signOut(auth);
     window.location = "/task7Redux";
   };
-  console.log(auth);
   return (
     <>
       <h1>{isUser.email}</h1>
