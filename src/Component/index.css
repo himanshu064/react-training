@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  ---font: "Poppins", sans-serif;
+}
+.task-heading {
+  font-family: var(---font);
+  text-transform: capitalize;
+}
+.filter-form .form-control,
+.filter-form .form-select {
+  width: 15vw;
+}
