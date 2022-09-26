@@ -1,15 +1,24 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Task1 from "./pages/Task1";
-import Task2 from "./pages/Task2";
-import Task3 from "./pages/Task3";
-
+import RegisterRedux from "./Component/RegisterRedux";
+import Login from "./Component/Login";
+import WelcomeRedux from "./Component/welcomeRedux";
+import AboutRedux from "./Component/About";
+import ReduxProtected from "./Component/ReduxProtected";
+import ReduxLogProtected from "./Component/ReduxLogProtected";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/task1' element={<Task1 />} />
-        <Route path='/task2' element={<Task2 />} />
-        <Route path='/task3' element={<Task3 />} />
+        <Route element={<ReduxLogProtected />}>
+          <Route path="task7Redux" element={<Login />}></Route>
+          <Route path="task7Redux/register" element={<RegisterRedux />}></Route>
+        </Route>
+
+        <Route element={<ReduxProtected />}>
+          <Route path="task7Redux/welcome" element={<WelcomeRedux />} />
+          <Route path="task7Redux/about" element={<AboutRedux />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
