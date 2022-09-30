@@ -1,73 +1,128 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React,{useState} from 'react';
 import './style.css';
 
 const Form = () => {
-    const [data,setData] = useState ({
-        FirstName:"",
-        LastName:"",
-        Position:""
+  const [inputFields, setInputFields] = useState([
+    {firstname: '', lastname: '', position: ''}
+  ]);
+  const [result,setResult] = useState ([]);
+  const [update,setUpdate] = useState ([]);
+  // const [checked,setChecked] = useState (false);
+  // Handle State Change
+  const HandleChange = (index, event) => {
+    let data = [...inputFields];
+    data[index][event.target.name] = event.target.value;
+    setInputFields(data);
+  }
+  // Adding New Form
+  const AddForm = () => {
+    let newfield = {firstname: '', lastname: '', position: ''};
+    setInputFields([...inputFields, newfield])
+  }
+  // Handle Submitt
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+    const add = [...result, ...inputFields];
+    setResult(add);
+    setInputFields([{firstname: '', lastname: '', position: ''}]);
+  }
+// Removing The Form
+const RemoveForm = (index) => {
+  let data = [...inputFields];
+  data.splice(index, 1)
+  setInputFields(data)
+}
+// Single Edit
+const HandleEdit = (index)=>{
+    const value = [result[index]];
+    setInputFields(value);
+    setUpdate(value);
+}
+// Single Delete
+const HandleDelete = (index)=>{
+  let data = [...result];
+  data.splice(index,1);
+  setResult(data);
+}
+// Handle Multiple Edit
+const HandleEditMultiple = (e)=>{
+    const values = [...result];
+    const data = values.filter((item) => {
+      if (item.checked) {
+        return item;
+      }
     });
-    const [result,setResult] = useState ([]);
-
-
-
-
-    const HandleChange =(e)=>{
-        const name = e.target.name;
-        const value = e.target.value;
-        setData({...data, [name]:value});
+    setResult(data);
+}
+// Handle Multiple Delete
+const HandleDeleteMultiple = (e)=>{
+  const values = [...result];
+  const data = values.filter((item) => {
+    if (!item.checked) {
+      return item;
     }
-    const HandleSubmit = (e)=>{
-        e.preventDefault();
-        if (!data.FirstName || !data.LastName || !data.Position){
-            alert("All Field Are Mandatory")
-        }else{
-        setResult([...result,data])
-        }
+  });
+  setResult(data);
+}
+// Handle Check Box
+const HandleCheck = (index) => {
+  const values = [...result];
+  values.forEach((item, id) => {
+    if (id === index) {
+      item.checked = !item.checked;
     }
-    console.log(result,'res')
-    const HandleDelete = (index)=> {
-        console.log(result,'index')
-        // let del =  result.splice(index, 1);
-        let del = result.filter((item)=>item.index !== index);
-         setResult(del);
-  
-    };
+  });
+  setResult(values);
+};
+const HandleUpdate = ()=>{
+  let Array1 = inputFields;
+  let Array2 = update;
+  let Array3 = Array1.splice(0, Array1.length, ...Array2);
+  setInputFields(Array3);
+  setInputFields([{firstname: '', lastname: '', position: ''}]);
+  setUpdate([]);
+}
+
   return (
     <>
-       <form onSubmit={HandleSubmit} className="filter-form d-flex justify-content-around  align-items-center  flex-row  form" >
-        <div className="mb-3">
-          <label htmlFor="FirstName" className="form-label">
-            First Name
-          </label>
-          <input onChange={HandleChange} name='FirstName' value={data.FirstName} type="text" className="form-control" placeholder="Enter First Name" />
-        </div> 
-        <div className="mb-3">
-          <label htmlFor="LastName" className="form-label">
-            Last Name
-          </label>
-          <input onChange={HandleChange} name='LastName' value={data.LastName} type="text" className="form-control" placeholder="Enter Last Name" />
-        </div> 
-        <div className="mb-3">
-          <label htmlFor="Position" className="form-label">
-            Position
-          </label>
-          <input onChange={HandleChange} name='Position' value={data.Position} type="text" className="form-control" placeholder="Enter Position" />
-        </div> 
-        <button className="btn btn-primary" type="submit"> Remove  </button>
-        <button className="btn btn-primary" type="submit"> Add  </button>
-        {/* <button onSubmit={HandleSubmit} className="btn btn-primary" type="submit"> Submit  </button> */}
-        </form> 
-        <br /> 
-        <button onSubmit={HandleSubmit} className="button btn btn-primary" type="submit"> Submit  </button>
-        <br />
-        <br />
-       
-    {/* Table For Shoe Data */}
+    <form onSubmit={HandleSubmit} >
+      {inputFields.map((input, index) => {
+          return (
+            <div key={index}>
+      <label className='left' htmlFor='firstname'>Enter First Name</label>
+      <input className='left' name='firstname' placeholder='First Name' value={input.firstname} 
+       onChange={event => HandleChange(index, event)} />
+      <label className='left' htmlFor='lastname'>Enter Last Name</label>
+      <input className='left' name='lastname' placeholder='Last Name' value={input.lastname}
+       onChange={event => HandleChange(index, event)} />
+      <label className='left' htmlFor='position'>Enter Position</label>
+      <input className='left' name='position' placeholder='Position' value={input.position}
+       onChange={event => HandleChange(index, event)} />
+       <button className='btn btn-danger custom-left' onClick={() => RemoveForm(index)}>Remove</button>
+       </div>
+          )
+      })}
+    </form>
+    <hr />
+    <div className="button">  
+    
+    <button className='btn btn-primary custom-margin' onClick={HandleEditMultiple}>Edit Multiple</button>
+    <button className='btn btn-danger custom-margin' onClick={HandleDeleteMultiple}>Delete Multiple</button>
+    
+    <button className='btn btn-success custom-margin' onClick={AddForm}>Add</button>
+    {update.length >=1?
+    (<button className='btn btn-primary custom-margin' onClick={HandleUpdate}>Update</button>
+    ):(
+    <button className='btn btn-primary custom-margin' onClick={HandleSubmit}>Submit</button>
+    )}
+    </div>
+    
+    <hr />
+
+    {/* Table For Show Data */}
     <table className='table'>
         <thead>
+            <th>Status</th>
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -75,19 +130,19 @@ const Form = () => {
             <th>Actions</th>
         </thead>
         <tbody>
-            {result.map((element,index)=>{
-                return (
-              <tr key={index}>
+            {result.map((e,index)=>{
+              return (
+                    <tr key={index}>
+              <td> <input type='checkbox' checked={e.checked} onChange={() =>HandleCheck(index)} /> </td>  
               <td>{index + 1}</td>
-              <td>{element.FirstName}</td>
-              <td>{element.LastName}</td>
-              <td>{element.Position}</td>
-              <i className="fa-solid fa-pen-to-square"></i>
-              <i onClick={()=>HandleDelete(index)} className="fa-solid fa-trash"></i>
-          </tr>  
+              <td>{e.firstname}</td>
+              <td>{e.lastname}</td>
+              <td>{e.position}</td>
+              <i onClick={()=>HandleEdit(index)} className="fa-solid fa-pen-to-square edit"></i>  
+              <i onClick={()=>HandleDelete(index)} className="fa-solid fa-trash delete"></i>  
+                 </tr>
                 )
-            })}
-               
+            })}               
         </tbody>
     </table>
     </>
