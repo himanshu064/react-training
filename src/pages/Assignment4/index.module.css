@@ -1,0 +1,21 @@
+.customColumn{
+    display: flex;
+    padding: 0px 0px !important;
+    gap: 43px;
+}
+.inputFields{
+    width: 355px !important;
+}
+.formBtn{
+    margin-top: auto;
+}
+.form{
+    padding: 20px 0px;
+}
+.deleteBtn{
+    margin-right: 20px;
+}
+.submitBtn{
+    text-align: center;
+    padding-top: 20px;
+}
