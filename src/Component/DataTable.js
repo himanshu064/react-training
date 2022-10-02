@@ -8,15 +8,23 @@ const DataTable = () => {
     deleteMany,
     updateItem,
     updateMany,
+    selected,
   } = useGlobalContext();
   return (
     <>
-      <button className="btn btn-primary" onClick={deleteMany}>
-        delete many
-      </button>
-      <button className="btn btn-primary" onClick={updateMany}>
-        update many
-      </button>
+      {selected.length > 1 ? (
+        <>
+          <button className="btn btn-primary" onClick={deleteMany}>
+            delete many
+          </button>
+          <button className="btn btn-primary" onClick={updateMany}>
+            update many
+          </button>
+        </>
+      ) : (
+        ""
+      )}
+
       <table className="table">
         <thead>
           <tr>
@@ -46,8 +54,7 @@ const DataTable = () => {
                 <td>
                   <button
                     className="btn btn-primary"
-                    onClick={() => updateItem(name)}
-                  >
+                    onClick={() => updateItem(name)}>
                     edit
                   </button>
                 </td>
@@ -56,8 +63,7 @@ const DataTable = () => {
                     className="btn btn-primary"
                     onClick={() => {
                       deleteSingle(index);
-                    }}
-                  >
+                    }}>
                     Delete
                   </button>
                 </td>

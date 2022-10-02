@@ -12,6 +12,8 @@ const AppProvider = ({ children }) => {
     },
   ]);
   const [update, setUpdate] = useState(false);
+  const [editAll, setEditAll] = useState(false);
+  const [selected, setSelected] = useState([]);
   // tabledata
   const [tableData, setTableData] = useState([]);
   const HandleSubmit = (event) => {
@@ -19,9 +21,9 @@ const AppProvider = ({ children }) => {
     let combinedata = [...tableData, ...inputFields];
     setTableData(combinedata);
     // let combinedata = [...tableData, ...inputFields];
-    setTableData(combinedata);
     setInputFields([
       {
+        id: Math.floor(Math.random() * 100),
         name: "",
         course: "",
         rollno: "",
@@ -59,6 +61,8 @@ const AppProvider = ({ children }) => {
         item.checked = !item.checked;
       }
     });
+    let res = newTabledata.filter((item) => item.checked === true);
+    setSelected([...selected, res]);
     setTableData(newTabledata);
   };
   // deleteMany
@@ -70,6 +74,7 @@ const AppProvider = ({ children }) => {
       }
     });
     setTableData(data);
+    setSelected([]);
   };
   //set input fields on edit button click
   const updateItem = (name) => {
@@ -128,6 +133,40 @@ const AppProvider = ({ children }) => {
   const updateMany = () => {
     let checkTrue = [...tableData];
     let data = checkTrue.filter((item) => item.checked === true);
+    setInputFields(
+      data.map((items) => {
+        const { id, name, course, rollno } = items;
+        return {
+          id: id,
+          name: name,
+          course,
+          rollno,
+        };
+      })
+    );
+    setEditAll(true);
+  };
+  const updateAll = () => {
+    let tableToUpdate = [...tableData];
+    let filedToData = [...inputFields];
+    let res = tableToUpdate.map((inputItem) => {
+      const { id } = inputItem;
+      let index = filedToData.find((item) => item.id === id);
+      if (index) {
+        return index;
+      }
+      return inputItem;
+    });
+    setTableData(res);
+    setInputFields([
+      {
+        name: "",
+        course: "",
+        rollno: "",
+      },
+    ]);
+    setEditAll(false);
+    setSelected([]);
   };
   return (
     <AppContext.Provider
@@ -145,8 +184,10 @@ const AppProvider = ({ children }) => {
         updateSingle,
         update,
         updateMany,
-      }}
-    >
+        updateAll,
+        editAll,
+        selected,
+      }}>
       {children}
     </AppContext.Provider>
   );

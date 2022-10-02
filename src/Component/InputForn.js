@@ -10,6 +10,9 @@ const InputFrom = () => {
     MoreFields,
     updateSingle,
     update,
+    updateAll,
+    editAll,
+    selected,
   } = useGlobalContext();
 
   const RemoveFields = (index) => {
@@ -25,8 +28,7 @@ const InputFrom = () => {
             return (
               <div
                 className="d-flex justify-content- align-items-center"
-                key={index}
-              >
+                key={index}>
                 <input
                   type="text"
                   className="form-control mx-3"
@@ -55,8 +57,7 @@ const InputFrom = () => {
                 {inputFields.length > 1 ? (
                   <button
                     className="btn btn-primary"
-                    onClick={() => RemoveFields(index)}
-                  >
+                    onClick={() => RemoveFields(index)}>
                     remove
                   </button>
                 ) : (
@@ -66,9 +67,19 @@ const InputFrom = () => {
             );
           })}
         </form>
-        <button className="btn btn-primary" onClick={HandleSubmit}>
-          submit
-        </button>
+        {selected.length < 1 ? (
+          <>
+            <button className="btn btn-primary" onClick={HandleSubmit}>
+              submit
+            </button>
+            <button className="btn btn-primary" onClick={MoreFields}>
+              Add More
+            </button>
+          </>
+        ) : (
+          ""
+        )}
+
         {update === true ? (
           <button className="btn btn-primary" onClick={() => updateSingle()}>
             update
@@ -76,9 +87,13 @@ const InputFrom = () => {
         ) : (
           ""
         )}
-        <button className="btn btn-primary" onClick={MoreFields}>
-          Add More
-        </button>
+        {editAll === true ? (
+          <button className="btn btn-primary" onClick={updateAll}>
+            update All
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
