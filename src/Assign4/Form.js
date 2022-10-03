@@ -3,11 +3,10 @@ import './style.css';
 
 const Form = () => {
   const [inputFields, setInputFields] = useState([
-    {firstname: '', lastname: '', position: ''}
+    {id: Math.floor(Math.random() * 100),firstname: '', lastname: '', position: '',checked:false}
   ]);
   const [result,setResult] = useState ([]);
   const [update,setUpdate] = useState ([]);
-  // const [checked,setChecked] = useState (false);
   // Handle State Change
   const HandleChange = (index, event) => {
     let data = [...inputFields];
@@ -16,7 +15,7 @@ const Form = () => {
   }
   // Adding New Form
   const AddForm = () => {
-    let newfield = {firstname: '', lastname: '', position: ''};
+    let newfield = {id:Math.floor(Math.random()*100),firstname: '', lastname: '', position: '',checked:false};
     setInputFields([...inputFields, newfield])
   }
   // Handle Submitt
@@ -24,7 +23,7 @@ const Form = () => {
     e.preventDefault();
     const add = [...result, ...inputFields];
     setResult(add);
-    setInputFields([{firstname: '', lastname: '', position: ''}]);
+    setInputFields([{id:Math.floor(Math.random()*100), firstname: '', lastname: '', position: '',checked:false}]);
   }
 // Removing The Form
 const RemoveForm = (index) => {
@@ -33,11 +32,56 @@ const RemoveForm = (index) => {
   setInputFields(data)
 }
 // Single Edit
-const HandleEdit = (index)=>{
-    const value = [result[index]];
-    setInputFields(value);
-    setUpdate(value);
+const HandleEdit = (firstname)=>{
+  const updateOneItem = [...result];
+  const data = updateOneItem.filter((item) => item.firstname === firstname);
+  data.map((item) => {
+    const { firstname, lastname, position, id } = item;
+    return setInputFields([
+      {
+        id: id,
+        firstname: firstname,
+        lastname: lastname,
+        position: position,
+      },
+    ]);
+  });
 }
+
+const updateSingle = () => {
+  let inputFiledData = [...inputFields];
+  let updatedData = [...result];
+  let object = inputFiledData.reduce(
+    (obj, item) =>
+      Object.assign(obj, {
+        id: item.id,
+        firstname: item.firstname,
+        lastname: item.lastname,
+        position: item.position,
+      }),
+    {}
+  );
+
+  let Data = updatedData.map((item) => {
+    if (item.id === object.id) {
+      return {
+        ...item,
+        firstname: object.firstname,
+        lastname: object.lastname,
+        position: object.position,
+      };
+    }
+    return item;
+  });
+  setResult(Data);
+  setInputFields([
+    {
+      firstname: "",
+      lastname: "",
+      position: "",
+    },
+  ]);
+};
 // Single Delete
 const HandleDelete = (index)=>{
   let data = [...result];
@@ -45,15 +89,21 @@ const HandleDelete = (index)=>{
   setResult(data);
 }
 // Handle Multiple Edit
-const HandleEditMultiple = (e)=>{
-    const values = [...result];
-    const data = values.filter((item) => {
-      if (item.checked) {
-        return item;
-      }
-    });
-    setResult(data);
-}
+const HandleEditMultiple = () => {
+  let checkTrue = [...result];
+  setUpdate(checkTrue);
+  let data = checkTrue.filter((item) => item.checked === true);
+  setInputFields(
+    data.map((items) => {
+      const { id, firstname, lastname, position } = items;
+      return {
+        id: id,
+        firstname,
+        lastname,
+        position,
+      };
+    }))
+  }
 // Handle Multiple Delete
 const HandleDeleteMultiple = (e)=>{
   const values = [...result];
@@ -74,14 +124,28 @@ const HandleCheck = (index) => {
   });
   setResult(values);
 };
-const HandleUpdate = ()=>{
-  let Array1 = inputFields;
-  let Array2 = update;
-  let Array3 = Array1.splice(0, Array1.length, ...Array2);
-  setInputFields(Array3);
-  setInputFields([{firstname: '', lastname: '', position: ''}]);
+// Update Value
+const HandleUpdate = () => {
+  let tableToUpdate = [...result];
+  let filedToData = [...inputFields];
+  let res = tableToUpdate.map((inputItem) => {
+    const { id } = inputItem;
+    let index = filedToData.find((item) => item.id === id);
+    if (index) {
+      return index;
+    }
+    return inputItem;
+  });
+  setResult(res);
+  setInputFields([
+    {
+      firstname: "",
+      lastname: "",
+      position: "",
+    },
+  ]);
   setUpdate([]);
-}
+};
 
   return (
     <>
@@ -115,6 +179,7 @@ const HandleUpdate = ()=>{
     ):(
     <button className='btn btn-primary custom-margin' onClick={HandleSubmit}>Submit</button>
     )}
+    <button className='btn btn-primary custom-margin' onClick={updateSingle}>UpdateSingle</button>
     </div>
     
     <hr />
@@ -138,7 +203,7 @@ const HandleUpdate = ()=>{
               <td>{e.firstname}</td>
               <td>{e.lastname}</td>
               <td>{e.position}</td>
-              <i onClick={()=>HandleEdit(index)} className="fa-solid fa-pen-to-square edit"></i>  
+              <i onClick={() => HandleEdit(e.firstname)} className="fa-solid fa-pen-to-square edit"></i>  
               <i onClick={()=>HandleDelete(index)} className="fa-solid fa-trash delete"></i>  
                  </tr>
                 )
