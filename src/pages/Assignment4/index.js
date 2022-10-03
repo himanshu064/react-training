@@ -7,16 +7,37 @@ const Assignment4 = () => {
   const [editing, setEditing] = useState(false);
   const [enteredData, setEnteredData] = useState([
     {
+      id: "",
       fname: "",
       lname: "",
       phone: "",
       ischecked: false,
     },
   ]);
-
-  const onFormSubmit = (e) => {
+  const handleInputChange = (index, event) => {
+    const values = [...enteredData];
+    if (event.target.name === "fname") {
+      values[index].fname = event.target.value;
+    }
+    if (event.target.name === "lname") {
+      values[index].lname = event.target.value;
+    }
+    if (event.target.name === "phone") {
+      values[index].phone = event.target.value;
+    }
+    if (event.target.name === "check") {
+      values[index].ischecked = event.target.checked;
+    }
+    setEnteredData(values);
+  };
+  const dataSubmitted = (e) => {
     e.preventDefault();
     const combine = [...tableData, ...enteredData];
+    const values = [...enteredData];
+    const ids = values.map((item) => {
+      return (item.id = Math.floor(Math.random() * 100));
+    });
+    setEnteredData(ids);
     setTableData(combine);
     console.log(combine, "combinned data");
     console.log(enteredData, "enteredData");
@@ -30,30 +51,30 @@ const Assignment4 = () => {
       },
     ]);
   };
-  const deleteAll = (e) => {
-    const values = [...tableData];
-    const data = values.filter((item) => {
-      if (!item.ischecked) {
-        return item;
-      }
+  const updateData = (e) => {
+    console.log(enteredData);
+    console.log(tableData);
+    const dataOfTable = [...tableData];
+    const dataOfFields = [...enteredData];
+    const changingindex = dataOfFields.map((item) => {
+      return item.id;
     });
+    console.log(changingindex);
+    const data = dataOfTable.map((item) => {
+      dataOfFields.forEach((itm) => {
+        if (itm.id === item.id) {
+          item.fname = itm.fname;
+          item.lname = itm.lname;
+          item.phone = itm.phone;
+          item.ischecked = false;
+        }
+      });
+      return item;
+    });
+    console.log(data, "dsss");
+    setEditing(false);
     setTableData(data);
-  };
-  const editAll = (e) => {
-    setEditing(true);
-    const values = [...tableData];
-    const data = values.filter((item) => {
-      if (item.ischecked) {
-        return item;
-      }
-    });
-    setEnteredData(data);
-  };
-  const deleteOne = (index) => {
-    console.log(index);
-    const values = [...tableData];
-    values.splice(index, 1);
-    setTableData(values);
+    setEnteredData([{ fname: "", lname: "", phone: "", ischecked: false }]);
   };
   const handleAddFields = () => {
     const values = [...enteredData];
@@ -70,29 +91,55 @@ const Assignment4 = () => {
     values.splice(index, 1);
     setEnteredData(values);
   };
-  const handleInputChange = (index, event) => {
-    const values = [...enteredData];
-    if (event.target.name === "fname") {
-      values[index].fname = event.target.value;
-    }
-    if (event.target.name === "lname") {
-      values[index].lname = event.target.value;
-    }
-    if (event.target.name === "phone") {
-      values[index].phone = event.target.value;
-    }
-    if (event.target.name === "check") {
-      values[index].ischecked = event.target.checked;
-    }
-
-    setEnteredData(values);
+  const deleteAll = (e) => {
+    const values = [...tableData];
+    const data = values.filter((item) => {
+      if (!item.ischecked) {
+        return item;
+      }
+    });
+    setTableData(data);
   };
+  const editAll = (e) => {
+    setEditing(true);
+    const updateItems = [...tableData];
+    const data = updateItems.filter((item) => item.ischecked === true);
+    setEnteredData(
+      data.map((items) => {
+        const { fname, lname, phone, id, ischecked } = items;
+        return {
+          id: id,
+          fname: fname,
+          lname: lname,
+          phone: phone,
+          ischecked: ischecked,
+        };
+      })
+    );
+  };
+  const deleteOne = (index) => {
+    console.log(index);
+    const values = [...tableData];
+    values.splice(index, 1);
+    setTableData(values);
+  };
+
   const editOne = (index) => {
     setEditing(true);
-    const value = [tableData[index]];
-    console.log(index);
-    console.log(enteredData, "enteredd data is ");
-    setEnteredData(value);
+    const updateOneItem = [...tableData];
+    const data = updateOneItem.filter((item, idx) => index === idx);
+    data.map((item) => {
+      const { fname, lname, phone, id, ischecked } = item;
+      return setEnteredData([
+        {
+          id: id,
+          fname: fname,
+          lname: lname,
+          phone: phone,
+          ischecked: ischecked,
+        },
+      ]);
+    });
   };
   const checkAll = (event) => {
     const values = [...tableData];
@@ -112,22 +159,7 @@ const Assignment4 = () => {
     });
     setTableData(values);
   };
-  const updateData = (e) => {
-    e.preventDefault();
-    setEditing(false);
-    setEnteredData([
-      {
-        fname: "",
-        lname: "",
-        phone: "",
-        ischecked: false,
-      },
-    ]);
-    const values = [...tableData];
-    values.forEach((item) => {
-      item.ischecked = false;
-    });
-  };
+
   return (
     <>
       <Container>
@@ -195,12 +227,9 @@ const Assignment4 = () => {
 
               <Col className={styles.submitBtn}>
                 {editing ? (
-                  <Button onClick={updateData}> Update</Button>
+                  <Button onClick={(e) => updateData(e)}> Update</Button>
                 ) : (
-                  <Button type="submit" onClick={onFormSubmit}>
-                    {" "}
-                    Submit
-                  </Button>
+                  <Button onClick={(e) => dataSubmitted(e)}> Submit</Button>
                 )}
               </Col>
             </Row>
@@ -232,7 +261,6 @@ const Assignment4 = () => {
                     <input
                       type="checkbox"
                       name="check"
-                      // checked={isAllChecked}
                       onClick={(e) => {
                         checkAll(e);
                       }}
