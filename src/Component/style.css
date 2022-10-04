@@ -31,6 +31,7 @@
     font-family: var(---font);
     font-size: 1.3rem;
     color: #2596be;
+    cursor: pointer;
 }
 .shorten-url .copy{
     font-size: 1rem;
