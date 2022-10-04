@@ -38,19 +38,17 @@ function Assignment5() {
     document.addEventListener("keydown", space, true);
   }, []);
   const changecolors = async () => {
+    const obj = {};
     const newcolors = [...randomColor];
     newcolors.map((item) => {
       return (item.color =
         colorData[Math.floor(Math.random() * colorData.length)]);
     });
-    const show = newcolors.map((item, index) => {
-      const container = {};
-      // container[index + 1] = item.color;
-      container[item.id] = item.color;
-      return container;
+    randomColor.forEach((item, index) => {
+      obj[index + 1] = item.color;
     });
     setRandomColor(newcolors);
-    return await navigator.clipboard.writeText(JSON.stringify(show));
+    return await navigator.clipboard.writeText(JSON.stringify(obj));
   };
   function space(e) {
     if (e.keyCode === 32) {
