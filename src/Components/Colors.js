@@ -15,8 +15,13 @@ const Colors = () => {
       addPalette.push(random);
     }
     setPalette(addPalette);
-
-    let copyToClipBoard = JSON.stringify(Object.assign({}, addPalette));
+    let clipBoardArray = [];
+    let clipBoardIndex = 1;
+    addPalette.map((palettes) => {
+      clipBoardArray[clipBoardIndex] = palettes;
+      clipBoardIndex++;
+    });
+    let copyToClipBoard = JSON.stringify(Object.assign({}, clipBoardArray));
     navigator.clipboard.writeText(copyToClipBoard);
   };
   document.body.onkeyup = (event) => {
