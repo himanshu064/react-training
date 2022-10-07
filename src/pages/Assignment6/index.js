@@ -7,7 +7,6 @@ const Assignment6 = () => {
   const [shortenedLink, setShortenedLink] = useState("");
   const [userInput, setUserInput] = useState("");
   const [modalShow, setModalShow] = useState(false);
-
   var codes;
   let storage = localStorage.getItem("shortcodes");
   if (storage === null) {
@@ -17,10 +16,18 @@ const Assignment6 = () => {
   }
   useEffect(() => {
     updateData();
+    const url = window.location.href;
+    const [id, ...rest] = url.split("").reverse().join("").split("/");
+    if (id) {
+      const foundObject = data.find((item) => {
+        return item.shortcode === `${window.location.href}`;
+      });
+      window.location.href = foundObject.fullURL;
+    }
   }, [shortenedLink]);
 
   const [data, setData] = useState(codes);
-  const makeitShort = () => {
+  const makeitShort = async (e) => {
     if (userInput !== "") {
       let shortlink = makeRandom();
       const newdata = [...data];
@@ -30,11 +37,17 @@ const Assignment6 = () => {
         }
       });
       let response;
-      if (shortlink.includes("https://hrmn/")) {
+      if (shortlink.includes(window.location.href)) {
         response = shortlink;
       } else {
-        response = `https://hrmn/${shortlink}`;
+        response = `${window.location.href}${shortlink}`;
       }
+      // db.ref("urlData")
+      //   .set({
+      //     shortcode: response,
+      //     fullURL: userInput,
+      //   })
+      //   .catch(alert);
       setShortenedLink(response);
     }
   };

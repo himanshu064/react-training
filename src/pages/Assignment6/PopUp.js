@@ -16,31 +16,17 @@ function PopUp(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      {console.log(
-        props.data.map((item) => {
-          return (
-            <div className={styles.outputText}>
-              <a
-                href={item.shortcode}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => {
-                  openInNewTab(item.shortcode);
-                }}
-              >
-                {item.shortcode}
-              </a>
-            </div>
-          );
-        })
-      )}
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">History</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {props.data.map((item) => {
+        {props.data.map((item, index) => {
           return (
-            <div className={styles.outputDiv} style={{ marginBottom: "5px" }}>
+            <div
+              className={styles.outputDiv}
+              style={{ marginBottom: "5px" }}
+              key={index}
+            >
               <div className={styles.outputText}>
                 <a
                   href={item.shortcode}
