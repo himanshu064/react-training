@@ -15,7 +15,7 @@ const ShortenUrl = () => {
   const [shortenUrl, setShortenUrl] = useState("");
   const [AllUrl, setAllUrl] = useState(getHistory());
   const [id, setId] = useState("");
-  let baseUrl = `http://localhost/`;
+  let baseUrl = `http://localhost:3000/`;
   const HandleShortenUrl = (e) => {
     e.preventDefault();
     const unique_id = uuid();
@@ -37,9 +37,10 @@ const ShortenUrl = () => {
   const HandleCopyToClipBoard = () => {
     navigator.clipboard.writeText(shortenUrl);
   };
+
   const HandleRedirect = () => {
     const mainlUrl = AllUrl.find((item) => item.id === id);
-    window.location.href = mainlUrl.fullUrl;
+    window.location = mainlUrl.fullUrl;
   };
   return (
     <>
