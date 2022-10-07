@@ -1,96 +1,56 @@
-import React,{useState,useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
+import { Link } from "react-router-dom";
+import "./style.css";
 
 const Shortner = () => {
-    const [input, setInput] = useState("");
-    const [shortenedLink, setShortenedLink] = useState('');
-
-  var url;
-  let BothUrl = localStorage.getItem("BothUrl");
-  if (BothUrl === null) {
-    url = [];
-  } else {
-    url = JSON.parse(BothUrl);
+  const getHistory = () => {
+    if (JSON.parse(localStorage.getItem("visitedLink")) === null) {
+      return [];
+    } else {
+      return JSON.parse(localStorage.getItem("visitedLink"));
+    }
+  };
+  const [input, setInput] = useState("");
+  const [shortenedLink, setShortenedLink] = useState("");
+  const [AllUrl, setAllUrl] = useState(getHistory());
+  const [id, setId] = useState("");
+  //Handle Change
+  let baseUrl = window.location.href;
+  const HandleChange = (e)=>{
+    setInput(e.target.value);
   }
-  const HandleChange = (e) =>{
-        setInput(e.target.value)
-    }
-  useEffect(() => {
-    updateData();
-    const url = window.location.href;
-    const [id, ...rest] = url.split("").reverse().join("").split("/");
-    if (id) {
-      const foundObject = history.find((item) => {
-        return item.shortUrl === `${window.location.href}`;
-      });
-      window.location.href = foundObject.fullURL;
-    }
-  }, [shortenedLink]);
-
-  const [history, setHistory] = useState(url);
-  const ShortUrl = async (e) => {
-    if (input !== "") {
-      let shortlink = RandomString();
-      console.log(shortlink,'short')
-      const newdata = [...history];
-      newdata.map((item) => {
-        if (item.fullURL === input) {
-          shortlink = item.shortUrl;
-        }
-      });
-      let response;
-      if (shortlink.includes(window.location.href)) {
-        response = shortlink;
-      } else {
-        response = `${window.location.href}${shortlink}`;
-      }
-      setShortenedLink(response);
-    }
-  };
-  function RandomString() {
+  //Handle Shorting The Url
+  const ShortUrl = (e) => {
+    e.preventDefault();
     const unique_id = uuid();
-    const small_id = unique_id.slice(0, 6);
-    return small_id;
-}
-  const HandleCopy = async () => {
-    return await navigator.clipboard.writeText(shortenedLink);
+    const small_id = unique_id.slice(0, 5);
+    let url = `${baseUrl}${small_id}`;
+    setShortenedLink(url);
+    setInput("");
+    let item = {
+      id: small_id,
+      fullUrl: input,
+      url: url,
+    };
+    let data = [...AllUrl, item];
+    setAllUrl(data);
+    setId(small_id);
+    localStorage.setItem("visitedLink", JSON.stringify(data));
   };
-  const openInNewTab = (code) => {
-    const link = openUrl(code);
-    window.open(link, "_blank", "noopener noreferrer");
+  //Handle Copy
+  const HandleCopy = () => {
+    navigator.clipboard.writeText(shortenedLink);
   };
-  const openUrl = (code) => {
-    const newdata = [...history];
-    let response;
-    newdata.map((item) => {
-      if (item.shortUrl === code) {
-        return (response = item.fullURL);
-      }
-    });
-    return response;
-  };
-  const updateData = () => {
-    const finder = history.find((obj) => {
-      return obj.fullURL === input;
-    });
-    if (finder === undefined) {
-      if (input) {
-        const newData = [
-          ...history,
-          {
-            shortUrl: shortenedLink,
-            fullURL: input,
-          },
-        ];
-        setHistory(newData);
-        localStorage.setItem("BothUrl", JSON.stringify(newData));
-      }
-    }
+// Handle Redirect To New Window
+  const HandleRedirect = () => {
+    const mainlUrl = AllUrl.find((item) => item.id === id);
+    // window.location = mainlUrl.fullUrl;
+    window.open(mainlUrl.fullUrl,'_blank');
   };
   return (
     <>
-    <div className="header">
+      <div className="header">
         <h2>Shortener</h2>
         <Link to='/history'>
         <button className='history'>History</button>
@@ -104,17 +64,8 @@ const Shortner = () => {
         {shortenedLink.length > 1 ? (
             <>
             <h2 className='link'>Your Shorten Link</h2>
-            <div className='footer'>
-            <a
-            href={openUrl(shortenedLink)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => {
-              openInNewTab(shortenedLink);
-            }}
-          >
-            {shortenedLink}
-          </a>
+            <div className='footer'> 
+             <h3 onClick={HandleRedirect}> {shortenedLink}</h3> 
             <i onClick={HandleCopy} className="fa-solid fa-copy"></i>
             </div>
             </>
@@ -122,7 +73,7 @@ const Shortner = () => {
          }
     </div>
     </>
-  )
-}
+  );
+};
 
 export default Shortner;

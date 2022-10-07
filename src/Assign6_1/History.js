@@ -4,10 +4,9 @@ import './style.css';
 
 const History = () => {
     const HandleCopy =(item) => {
-        // console.log(index,'index')
-     navigator.clipboard.writeText(item.shortcode);
+     navigator.clipboard.writeText(item.url);
       };
-let history = JSON.parse(localStorage.getItem("BothUrl"));
+let history = JSON.parse(localStorage.getItem("visitedLink"));
 console.log(history,'a')
 return (
 <>
@@ -15,7 +14,7 @@ return (
 <h2 className='container'>Your History</h2>
 {history.map((item)=>{
 return(
- <div className="area">{item.shortcode}  <i onClick={()=>HandleCopy(item)} className="fa-solid fa-copy"></i>      </div>
+ <div className="area">{item.url}  <i onClick={()=>HandleCopy(item)} className="fa-solid fa-copy"></i>      </div>
 )
 })}
 </>
