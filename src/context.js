@@ -1,18 +1,26 @@
-import React, {useContext} from 'react';
+import React, { useContext, useState } from "react";
 
-const Context = React.createContext();
+const AppContext = React.createContext();
 
-const Provider = ({children}) =>{
-    return (
-        <Context.Provider value={{
+const AppProvider = ({ children }) => {
+  const [Timer, setTimer] = useState();
 
-        }}>
-         {children}
-        </Context.Provider>
-    );
+  const HandleSetTimer = (e) => {
+    setTimer(e.target.value);
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
+        Timer,
+        HandleSetTimer,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
-
-export const useGlobalContext =() => {
-    return useContext(Context);
+export const useGlobalContext = () => {
+  return useContext(AppContext);
 };
-export {Context, Provider};
+export { AppContext, AppProvider };
