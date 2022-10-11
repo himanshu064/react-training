@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.password-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.password {
+  width: 30vw;
+  height: auto;
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.password h1 {
+  font-size: 1.7rem;
+  text-align: center;
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
+  color: #242424;
+}
+.genratedPass {
+  font-size: 1.3rem;
+  font-family: "Poppins", sans-serif;
+}
+.password .form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.password .fa-solid {
+  font-size: 1.3rem;
+}
+.password .btn-primary {
+  background-color: #ff7043 !important;
+  border-color: #ff7043 !important;
+}
+.password .btn-primary:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.password-input .form-control {
+  width: auto !important;
+}
+.password .form-label {
+  font-family: "Poppins", sans-serif;
+  text-transform: capitalize;
+}
+.password .form-check-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.password-strength{
+  width: 100%;
+  background-color: #ff7043;
+  color: #fafafa !important;
+}
