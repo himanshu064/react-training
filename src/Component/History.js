@@ -9,6 +9,9 @@ const History = () => {
     }
   };
   const [visited] = useState(getHistory());
+  const HandleCopyToClipBoard = (url) => {
+    navigator.clipboard.writeText(url);
+  };
   return (
     <>
       <h1 className="text-center p-3 heading">Shorten your url</h1>
@@ -20,6 +23,12 @@ const History = () => {
                 <a href={links.fullUrl} className="shorten-link">
                   {links.url}
                 </a>
+                <button
+                  className="btn btn-primary copy"
+                  onClick={HandleCopyToClipBoard(links.url)}
+                >
+                  copy to clipboard
+                </button>
               </div>
             );
           })}

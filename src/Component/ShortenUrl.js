@@ -40,7 +40,8 @@ const ShortenUrl = () => {
 
   const HandleRedirect = () => {
     const mainlUrl = AllUrl.find((item) => item.id === id);
-    window.location = mainlUrl.fullUrl;
+    // to open link in new tab
+    window.open(mainlUrl.fullUrl, "_blank");
   };
   return (
     <>
