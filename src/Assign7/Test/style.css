@@ -4,3 +4,12 @@ body{
 .container{
     text-align: center;
 }
+.correct{
+    color: green;
+}
+.incorrect{
+    color: red;
+}
+.active{
+    color: blue;
+}
