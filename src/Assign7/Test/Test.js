@@ -37,7 +37,6 @@ const Test = () => {
     //   navigate("/result");
     // }
      else {
-      if (test){
       var timer;
       timer = setTimeout(() => {
         setSec(sec - 1);
@@ -46,7 +45,7 @@ const Test = () => {
           setSec(59);
         }
       }, 1000)
-    }
+    
       return () => clearTimeout(timer)
     }
     // eslint-disable-next-line

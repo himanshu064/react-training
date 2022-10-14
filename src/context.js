@@ -8,7 +8,13 @@ const AppProvider = ({ children }) => {
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [correct,setCorrect] = useState([]);
   const [test,setTest] = useState(false);
-  const typeData = `hello Myself Abhishek Kumar. I have done my B.tech from Giani zail singh campus college of engineering and technology.`.split(' ');
+  const typeData = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel voluptas quaerat suscipit. Magni ullam aliquid ipsa debitis sunt, corrupti omnis optio? Ad ea quo minima fugiat laboriosam repellat, autem nulla.
+  Ullam cumque expedita libero numquam natus odit corrupti atque facere obcaecati incidunt deleniti necessitatibus distinctio quo, exercitationem repellendus optio suscipit omnis voluptatum quis labore asperiores nulla! Ut soluta in adipisci!
+  Quod deleniti ab, nemo aspernatur reprehenderit et, quo non dolores deserunt explicabo quasi nisi autem cum, nobis ducimus nam eveniet nostrum laudantium nesciunt ex? Unde sed reprehenderit totam repudiandae quisquam.
+  Modi omnis fugit veritatis sint, cumque suscipit id a amet molestiae alias eius! Dolores accusamus doloribus, maxime non autem qui deserunt? Sapiente ab reiciendis incidunt explicabo nulla neque aliquid placeat?
+  Cumque molestias temporibus minus commodi natus hic animi eos nostrum quis corporis ea soluta sit magnam, maiores expedita iste delectus voluptatum minima atque nulla. Quos amet vel fuga hic iure?
+  Repellat eligendi ullam qui quia eius natus nisi deleniti vero earum atque? Deleniti quo laudantium, animi maiores tempora obcaecati adipisci accusantium quas, nisi pariatur deserunt totam nulla est, voluptatem optio!
+  Totam veritatis, ipsam ea tempore atque iusto provident quasi ducimus sint labore sunt distinctio. Nisi laudantium architecto adipisci ducimus deserunt, aliquid minus explicabo dolorum vero in esse incidunt aut facilis.`.split(' ');
 
   const HandleSetTimer = (e) => {
     setTimer(e.target.value);
