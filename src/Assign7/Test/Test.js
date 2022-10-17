@@ -6,7 +6,7 @@ import './style.css';
 
 function Word(props){
   const {text,active,correct} = props;
-  if(correct === true){
+  if(correct){
     return <span className='correct' >{text} </span>
   }
   if(correct === false){
@@ -17,25 +17,20 @@ function Word(props){
   }
   return <span>{text} </span>
 }
-Word =  React.memo(Word);
+React.memo(Word);
 
 const Test = () => {
 
-  const {Timer,userInput,activeWordIndex,correct,typeData,startInput,test} = useGlobalContext();
+  const {Timer,userInput,activeWordIndex,correct,typeData,startInput} = useGlobalContext();
   const [min, setMin] = useState(Timer);
   const [sec, setSec] = useState(0);
   const navigate = useNavigate();
-  console.log(test,'trssdd')
-  //  const p = (userInput.split(' '));
   useEffect(() => {
     if (min === 0 && sec === 0) {
       setMin(0);
       setSec(0);
       navigate("/result");
     }
-    // if(typeData.length === p.length - 1){
-    //   navigate("/result");
-    // }
      else {
       var timer;
       timer = setTimeout(() => {
@@ -57,6 +52,7 @@ const Test = () => {
         <h1>{min} : {sec}</h1>
         <p>{typeData.map((word, i) => {
           return <span key={i}>
+            {/* <span> { word}</span> */}
             <Word
                   text={word}
                   active={i === activeWordIndex}
@@ -64,7 +60,7 @@ const Test = () => {
                  />
           </span> 
         })}</p>
-        <textarea onChange={(e)=>startInput(e.target.value)} value={userInput} cols="90" rows="10"></textarea>
+        <textarea  onChange={(e)=>startInput(e.target.value)} value={userInput} cols="90" rows="10"></textarea>
       </div>
     </>
   )

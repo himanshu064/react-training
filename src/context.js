@@ -7,7 +7,6 @@ const AppProvider = ({ children }) => {
   const [userInput, setUserInput] = useState('');
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [correct,setCorrect] = useState([]);
-  const [test,setTest] = useState(false);
   const typeData = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel voluptas quaerat suscipit. Magni ullam aliquid ipsa debitis sunt, corrupti omnis optio? Ad ea quo minima fugiat laboriosam repellat, autem nulla.
   Ullam cumque expedita libero numquam natus odit corrupti atque facere obcaecati incidunt deleniti necessitatibus distinctio quo, exercitationem repellendus optio suscipit omnis voluptatum quis labore asperiores nulla! Ut soluta in adipisci!
   Quod deleniti ab, nemo aspernatur reprehenderit et, quo non dolores deserunt explicabo quasi nisi autem cum, nobis ducimus nam eveniet nostrum laudantium nesciunt ex? Unde sed reprehenderit totam repudiandae quisquam.
@@ -20,20 +19,27 @@ const AppProvider = ({ children }) => {
     setTimer(e.target.value);
   };
   const startInput = (value) => {
-    setTest(true);
-    if(value.endsWith(' ')){
+    document.body.onkeyup = function(e){
+      if(e.keyCode === 32){
+    // if(value.endsWith(' ')){
       setUserInput(value);
+      setActiveWordIndex(i => i + 1);
       const a  = userInput.split(' ');
       const b = a[a.length - 1]
-      setActiveWordIndex(i => i + 1);
       const word = b.trim();
         const newResult = [...correct];
         newResult[activeWordIndex] =word === typeData[activeWordIndex];
       setCorrect( newResult)  
-    }else{
+      }
+    else if(e.keyCode === 8 &&  value.endsWith(' ') && activeWordIndex > 0 ){
+      setActiveWordIndex(i => i - 1);
+      setUserInput(value)
+    }
+    else{
       setUserInput(value);
     }
- }
+  }
+}
 
   return (
     <AppContext.Provider
@@ -43,8 +49,6 @@ const AppProvider = ({ children }) => {
         activeWordIndex,
         correct,
         typeData,
-        test,
-        setTest,
         HandleSetTimer,
         startInput,
       }}
